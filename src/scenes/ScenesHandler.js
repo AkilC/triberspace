@@ -19,14 +19,14 @@ const ScenesHandler = ({ characterRef }) => {
       {isWorldInitialized && (
         <Routes>
           <Route
-            key="testScene"
+            key="Scene1"
             path="/"
-            element={<TestScene characterRef={characterRef} />}
+            element={<Scene1 characterRef={characterRef} />}
           />
           <Route
-            key="scene1"
-            path="/scene1"
-            element={<Scene1 characterRef={characterRef} />}
+            key="testScene"
+            path="/testScene"
+            element={<TestScene characterRef={characterRef} />}
           />
         </Routes>
       )}
