@@ -37,7 +37,7 @@ const TestScene = ({ characterRef }) => {
   const { size, camera, scene } = useThree();
   const resolution = useMemo(() => new THREE.Vector2(size.width, size.height), [size]);
 
-  console.log('Scene state in TestScene:', scene);
+  /* console.log('Scene state in TestScene:', scene); */
 
   useEffect(() => {
     console.log('TestScene mounted');
@@ -102,7 +102,7 @@ const TestScene = ({ characterRef }) => {
         characterRef={characterRef}
         position={[-5, 0, -5]}
         size={[4, 4, 4]}
-        destination="v2.triber.space"
+        destination="v2.triber.spoace"
         onCharacterEnter={(destination) => {
           if (destination) {
             window.location.href = `https://${destination}`;
@@ -116,7 +116,7 @@ const TestScene = ({ characterRef }) => {
         characterRef={characterRef}
         position={[5, 0, -5]} // Set a different position for this portal
         size={[4, 4, 4]}
-        destination="v2.triber.space" // Set a different destination for this portal
+        destination="/" // Set a different destination for this portal
         onCharacterEnter={(destination) => {
           if (destination) {
             window.location.href = `https://${destination}`;

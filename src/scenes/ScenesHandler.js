@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Route, Routes, useLocation, Outlet } from "react-router-dom";
 import TestScene from "./TestScene";
 import Scene1 from "./Scene1";
