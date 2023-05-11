@@ -2,21 +2,31 @@ const express = require('express');
 const { Server } = require('colyseus');
 const { monitor } = require('@colyseus/monitor');
 const http = require('http');
+const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
 const gameServer = new Server({ server });
 
+app.use(cors());
+
 // Define your room
 const { MyRoom } = require('./MyRoom');
+const roomFactory = (domain) => {
+  return (options) => {
+    const room = new MyRoom(options);
+    room.domain = domain;
+    return room;
+  };
+};
 
-gameServer.define('my_room', MyRoom)
-  .onCreate((options) => {
-    const domain = options.domain || 'unknown';
-    this.domain = domain;
-    this.roomId = options.roomId;
-    console.log('Room created:', this.roomId, 'with domain:', this.domain);
-  });
+const requestJoin = (options, isNew) => {
+  return (room) => {
+    return room.domain === options.domain;
+  };
+};
+
+gameServer.define('my_room', MyRoom, roomFactory, requestJoin);
 
 app.use('/colyseus', monitor());
 
