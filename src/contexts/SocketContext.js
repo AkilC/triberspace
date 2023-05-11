@@ -22,7 +22,16 @@ export const SocketProvider = ({ children }) => {
       if (!client) return;
 
       const domain = window.location.hostname;
-      const newRoom = await client.joinOrCreate('my_room', { domain });
+      const roomId = `${domain}_${Math.random().toString(36).substr(2, 9)}`;
+      let newRoom;
+      try {
+        // Try joining an existing room by ID
+        newRoom = await client.joinById(roomId);
+      } catch (e) {
+        // If room not found, create a new room with the desired ID
+        newRoom = await client.create('my_room', { roomId, domain });
+      }
+
       console.log("NewRoom", newRoom);
       setRoom(newRoom);
     };

@@ -10,14 +10,13 @@ const gameServer = new Server({ server });
 // Define your room
 const { MyRoom } = require('./MyRoom');
 
-const requestJoin = (options, isNew) => {
-  return (room) => {
-    return room.domain === options.domain;
-  };
-};
-
 gameServer.define('my_room', MyRoom)
-  .requestJoin(requestJoin);
+  .onCreate((options) => {
+    const domain = options.domain || 'unknown';
+    this.domain = domain;
+    this.roomId = options.roomId;
+    console.log('Room created:', this.roomId, 'with domain:', this.domain);
+  });
 
 app.use('/colyseus', monitor());
 

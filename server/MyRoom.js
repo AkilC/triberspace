@@ -9,7 +9,7 @@ class MyRoom extends Room {
   onCreate(options) {
     this.players = {};
     this.domain = options.domain;
-    this.roomId = this.roomId + '_' + this.domain; // Append the domain to the room ID
+    this.roomId = options.roomId;
 
     console.log('Room created:', this.roomId);
 
