@@ -14,12 +14,14 @@ const roomFactory = (domain) => {
     return (options) => {
       const room = new MyRoom(options);
       room.domain = domain;
+      console.log("Room created from this domain:", domain);
       return room;
     };
 };
 
 const requestJoin = (options, isNew) => {
     return (room) => {
+      console.log("Room joined at this domain:", domain);
       return room.domain === options.domain;
     };
 };
