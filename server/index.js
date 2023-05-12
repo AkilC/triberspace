@@ -20,13 +20,23 @@ const roomFactory = (domain) => {
   };
 };
 
-const requestJoin = (options, isNew) => {
+c/* onst requestJoin = (options, isNew) => {
   return (room) => {
     return room.domain === options.domain;
   };
-};
+}; */
 
-gameServer.define('my_room', MyRoom, roomFactory, requestJoin);
+gameServer.define('my_room', MyRoom)
+  .onCreate((options) => {
+    this.domain = options.domain || 'unknown';
+    console.log('Room created for domain:', this.domain);
+  })
+  .requestJoin((options, isNewRoom) => {
+    if (isNewRoom) {
+      return true;
+    }
+    return this.domain === options.domain;
+  });
 
 app.use('/colyseus', monitor());
 
