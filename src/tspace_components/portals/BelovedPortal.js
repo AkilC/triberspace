@@ -1,4 +1,4 @@
-//Before
+//Before 
 import React, { useEffect, useContext, useRef } from 'react';
 import { useThree, useFrame, useLoader } from '@react-three/fiber';
 import { Vec3, Box } from 'cannon-es';
@@ -88,7 +88,7 @@ const createRippleMaterial = () => {
     }
   `;
   const textureLoader = new THREE.TextureLoader();
-  const imageTexture = textureLoader.load(process.env.PUBLIC_URL + '/assets/V2Logo-02.png');
+  const imageTexture = textureLoader.load(process.env.PUBLIC_URL + '/assets/BelovedLogo.png');
 
   const uniforms = {
     time: { type: "f", value: 0 },
@@ -199,7 +199,7 @@ window.addEventListener('resize', () => {
   portalRenderTarget.setSize(window.innerWidth, window.innerHeight);
 });
 
-const V2Portal = ({
+const BelovedPortal = ({
   characterRef,
   destination,
   position,
@@ -216,7 +216,6 @@ const V2Portal = ({
     mass: 0,
     position: new Vec3(...position),
     shape: new Box(new Vec3(0.05, 0.05, 0.05)),
-    collisionResponse: false,
   });
   
 
@@ -232,7 +231,7 @@ const V2Portal = ({
     backgroundCamera.updateMatrixWorld();
     backgroundCamera.matrixWorld.decompose(cameraPosition, cameraQuaternion, cameraScale);
   
-    const distanceFromCamera = 5; // Adjust this value as needed
+    const distanceFromCamera = 10; // Adjust this value as needed
     const cameraDirection = new THREE.Vector3();
     backgroundCamera.getWorldDirection(cameraDirection);
     const fillQuadPosition = cameraPosition.clone().add(cameraDirection.multiplyScalar(distanceFromCamera));
@@ -306,5 +305,5 @@ const V2Portal = ({
   );
 };
 
-export default V2Portal;
+export default BelovedPortal;
 

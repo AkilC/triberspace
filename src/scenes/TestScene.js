@@ -102,7 +102,7 @@ const TestScene = ({ characterRef }) => {
         characterRef={characterRef}
         position={[-5, 0, -5]}
         size={[4, 4, 4]}
-        destination="v2.triber.spoace"
+        destination="v2.triber.space"
         onCharacterEnter={(destination) => {
           if (destination) {
             window.location.href = `https://${destination}`;

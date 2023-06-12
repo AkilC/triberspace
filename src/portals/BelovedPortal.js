@@ -216,6 +216,7 @@ const BelovedPortal = ({
     mass: 0,
     position: new Vec3(...position),
     shape: new Box(new Vec3(0.05, 0.05, 0.05)),
+    collisionResponse: false,
   });
   
 
