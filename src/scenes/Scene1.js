@@ -226,7 +226,7 @@ const Scene1 = React.memo(({ characterRef }) => {
         position={[0, 0, 25]}
         size={[3, 3, 3]}
         rotation = {[0, 0, 0]}
-        destination="localhost:3002"
+        destination="v2.triber.space"
         onCharacterEnter={(destination) => {
           if (destination) {
             window.location.href = `http://${destination}`;
