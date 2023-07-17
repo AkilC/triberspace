@@ -226,10 +226,10 @@ const Scene1 = React.memo(({ characterRef }) => {
         position={[0, 0, 25]}
         size={[3, 3, 3]}
         rotation = {[0, 0, 0]}
-        destination="v2.triber.space"
+        destination="localhost:3002"
         onCharacterEnter={(destination) => {
           if (destination) {
-            window.location.href = `https://${destination}`;
+            window.location.href = `http://${destination}`;
           } else {
             console.error('Destination not found:', destination);
           }
