@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-document.addEventListener(
+/* document.addEventListener(
   'touchmove',
   function (event) {
     if (!event.target.classList.contains('allow-scrolling')) {
@@ -15,7 +15,7 @@ document.addEventListener(
     }
   },
   { passive: false }
-);
+); */
 
 
 root.render(
