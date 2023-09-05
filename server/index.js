@@ -5,38 +5,23 @@ const http = require('http');
 const cors = require('cors');
 
 const app = express();
+app.use(cors());
+app.options('*', cors());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 const server = http.createServer(app);
 const gameServer = new Server({ server });
 
-app.use(cors());
-
 // Define your room
 const { MyRoom } = require('./MyRoom');
-const roomFactory = (domain) => {
-  return (options) => {
-    const room = new MyRoom(options);
-    room.domain = domain;
-    return room;
-  };
-};
-
-c/* onst requestJoin = (options, isNew) => {
-  return (room) => {
-    return room.domain === options.domain;
-  };
-}; */
 
 gameServer.define('my_room', MyRoom)
-  .onCreate((options) => {
-    this.domain = options.domain || 'unknown';
-    console.log('Room created for domain:', this.domain);
-  })
-  .requestJoin((options, isNewRoom) => {
-    if (isNewRoom) {
-      return true;
-    }
-    return this.domain === options.domain;
-  });
+  .filterBy(['domain']);  // Add a matchmaking filter for the 'domain' attribute
 
 app.use('/colyseus', monitor());
 

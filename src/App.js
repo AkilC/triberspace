@@ -1,80 +1,52 @@
-import React, { useState, useRef, useMemo, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import IconButton from './tspace_components/components/IconButton';
-import WelcomeScreen from './tspace_components/components/WelcomeScreen';
-import { faThLarge, faUser, faCog } from '@fortawesome/free-solid-svg-icons';
-import Overlay from './tspace_components/components/Overlay';
-import './App.css';
-import ThirdPersonCamera from './tspace_components/components/ThirdPersonCamera';
-import { SocketProvider } from './tspace_components/contexts/SocketContext';
-import Multiplayer from './tspace_components/components/Multiplayer';
-import { LiveKitProvider } from './tspace_components/contexts/LiveKitContext';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import ScenesHandler from './scenes/ScenesHandler';
-import WorldContextProvider from './tspace_components/contexts/WorldContext';
-import MobileJoystick from './tspace_components/components/MobileControls';
-import Loading from './tspace_components/components/Loading';
-import ScenesHandler2D from './tspace_components/2D/ScenesHandler2D';
+import React from 'react';
+import './index.css';
 
 const App = () => {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [showWelcomeScreen, setShowWelcomeScreen] = useState(true);
-  const characterRef = useRef();
-  const [isLoading, setIsLoading] = useState(true);
-  const location = useLocation();
-  const key = useMemo(() => location.pathname, [location]);
-
-  const [joystickData, setJoystickData] = useState(null);
-  const [is3D, setIs3D] = useState(true); // added state for 3D mode
-
-  const handleJoystickMove = (data) => {
-    if (data === null) {
-      setJoystickData(null);
-    } else {
-      const angle = data.angle.radian;
-      const force = data.force;
-      setJoystickData({ angle, force });
-    }
-  };
-
-  const handleIconClick = (iconName) => {
-    if (iconName === 'thlarge') {
-      setIsOverlayOpen(!isOverlayOpen);
-    } else if (iconName === 'cog') {
-      setIs3D(!is3D); // toggle between 3D and 2D
-    } else {
-      console.log(`Icon ${iconName} clicked.`);
-    }
-  };
-
   return (
-    <LiveKitProvider>
-      <SocketProvider>
-        <WorldContextProvider>
-          <div className="app-container">
-            {is3D ? (
-              <Canvas gl={{ stencil: true }} key={key} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}>
-                <Suspense fallback={null}> {/* Use Suspense for async loading */}
-                  <ScenesHandler characterRef={characterRef} />
-                  <ThirdPersonCamera characterRef={characterRef} joystickData={joystickData}/>
-                  <Multiplayer />
-                </Suspense>
-              </Canvas>
-            ) : (
-              <ScenesHandler2D /> // Your 2D view outside of Canvas
-            )}
-            {isLoading && <Loading onLoadComplete={() => setIsLoading(false)} />}
-            <MobileJoystick onJoystickMove={(data) => handleJoystickMove(data)} />
-            <div className="icon-container">
-              <IconButton icon={faCog} onClick={() => handleIconClick('cog')} />
-              <IconButton icon={faUser} onClick={() => handleIconClick('user')} />
-              <IconButton icon={faThLarge} onClick={() => handleIconClick('thlarge')} />
-            </div>
-            {isOverlayOpen && <Overlay onClose={() => setIsOverlayOpen(false)} />}
-          </div>
-        </WorldContextProvider>
-      </SocketProvider>
-    </LiveKitProvider>
+    <div className="container">
+      <div className="video-background">
+        <video autoPlay loop muted>
+          <source src="/assets/WallBG.mp4" type="video/mp4" />
+        </video>
+        <div className="video-overlay"></div>
+      </div>
+      {/* Header */}
+      <div className="header">
+        <div className="logo" style={{backgroundImage: "url('/assets/TribeT.png')"}}></div>
+        <div className="button-group">
+          <button className="button button-outline">Log In</button>
+          <button className="button button-filled">Sign Up</button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="main-content">
+        {/* Title and Body */}
+        <div className="text-section">
+          <h1 className="large-title">TRIBER WORLDS</h1>
+          <p className="body-copy">Your favorite creators content in a real-time, 3D Community Space.</p>
+        </div>
+        
+        {/* Tiles */}
+        <div className="tiles">
+        <a href="https://v2.triber.space" className="tile-container">
+          <div className="tile" style={{backgroundImage: "url('/assets/V2WorldThumbnail.png')"}}></div>
+          <h3>V2 World (Demo)</h3>
+        </a>
+        <a href="#" className="tile-container">
+          <div className="tile" style={{backgroundImage: "url('/assets/ComingSoon.png')"}}></div>
+          <h3>Beloved. World</h3>
+        </a>
+        <a href="#" className="tile-container">
+          <div className="tile" style={{backgroundImage: "url('/assets/ComingSoon.png')"}}></div>
+          <h3>Ajaar World</h3>
+        </a>
+      </div>
+      </div>
+      <div className="footer-text">
+        BY <a href='https://triberstudios.com'>TRIBER STUDIOS!</a>
+      </div>
+    </div>
   );
 };
 
