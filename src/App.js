@@ -24,7 +24,7 @@ const App = () => {
         {/* Title and Body */}
         <div className="text-section">
           <h1 className="large-title">TRIBERSPACE</h1>
-          <p className="body-copy">Find your tribe in a universe of content worlds.</p>
+          <p className="body-copy">Find your tribe across a universe of content worlds.</p>
         </div>
         
         {/* Tiles */}
