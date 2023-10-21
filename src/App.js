@@ -23,8 +23,8 @@ const App = () => {
       <div className="main-content">
         {/* Title and Body */}
         <div className="text-section">
-          <h1 className="large-title">TRIBER WORLDS</h1>
-          <p className="body-copy">Your favorite creators content in a real-time, 3D Community Space.</p>
+          <h1 className="large-title">TRIBERSPACE</h1>
+          <p className="body-copy">Find your tribe in a universe of immersive content worlds.</p>
         </div>
         
         {/* Tiles */}
