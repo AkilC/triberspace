@@ -12,7 +12,7 @@ const App = () => {
       </div>
       {/* Header */}
       <div className="header">
-        {/* <div className="logo" style={{backgroundImage: "url('/assets/TribeT.png')"}}></div> */}
+        <div className="logo" /* style={{backgroundImage: "url('/assets/TribeT.png')"}} */></div>
         <div className="button-group">
           <button className="button button-outline">Log In</button>
           <button className="button button-filled">Sign Up</button>
