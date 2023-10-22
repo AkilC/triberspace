@@ -2,12 +2,20 @@ import React from 'react';
 import './index.css';
 
 const App = () => {
+  const videoRef = React.useRef(null);
+
+  React.useEffect(() => {
+      const videoElement = videoRef.current;
+      if (videoElement) {
+          videoElement.play();
+      }
+  }, []);
   return (
     <div className="container">
       <div className="video-background">
-        <video autoPlay loop muted>
+      <video ref={videoRef} autoPlay loop muted playsInline>
           <source src="/assets/WallBG.mp4" type="video/mp4" />
-        </video>
+      </video>
         <div className="video-overlay"></div>
       </div>
       {/* Header */}
