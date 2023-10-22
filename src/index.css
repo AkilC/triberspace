@@ -88,6 +88,7 @@ h3 {
 }
 
 .large-title {
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 48px;
   margin-bottom: 20px;
   color: #ddd;
@@ -142,13 +143,13 @@ h3 {
   width: 100%;
   padding-bottom: 56.25%;  /* 16:9 Aspect Ratio */
   position: relative;
-  background-color: #ddd;
+  background-color: #252525;
   border-radius: 12px;  /* 12px border-radius */
   background-size: cover;  /* Image will cover the entire tile */
   background-position: center;  /* Image will be centered */
   border-radius: 12px;
   border: 1px solid #353535;
-  box-shadow: 0 0 30px 2px rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 44px 1px rgba(106, 106, 106, 0.25);
   z-index: 1;  /* Raise the z-index so the shadow won't be covered by other elements */
 }
 
@@ -218,7 +219,7 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgb(10, 10, 10);
-  opacity: 0.95;
+  background-color: rgb(12, 12, 12);
+  opacity: 0.985;
   z-index: 0;
 }

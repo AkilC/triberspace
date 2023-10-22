@@ -23,22 +23,22 @@ const App = () => {
       <div className="main-content">
         {/* Title and Body */}
         <div className="text-section">
-          <h1 className="large-title">TRIBERSPACE</h1>
-          <p className="body-copy">Find your tribe across a universe of immersive content worlds - curated by and for the TRIBE</p>
+          <h1 className="large-title">triber.space</h1>
+          <p className="body-copy">Find your tribe across a universe of immersive content worlds.</p>
         </div>
         
         {/* Tiles */}
         <div className="tiles">
         <a href="https://v2.triber.space" className="tile-container">
-          <div className="tile" style={{backgroundImage: "url('/assets/V2WorldThumbnail.png')"}}></div>
+          <div className="tile" style={{backgroundImage: "url('/assets/V2Thumbnail.png')"}}></div>
           <h3>V2 World (Demo)</h3>
         </a>
         <a href="#" className="tile-container">
-          <div className="tile" style={{backgroundImage: "url('/assets/ComingSoon.png')"}}></div>
+          <div className="tile" style={{backgroundImage: "url('/assets/ComingSoonV2.png')"}}></div>
           <h3>Beloved. World</h3>
         </a>
         <a href="#" className="tile-container">
-          <div className="tile" style={{backgroundImage: "url('/assets/ComingSoon.png')"}}></div>
+          <div className="tile" style={{backgroundImage: "url('/assets/ComingSoonV2.png')"}}></div>
           <h3>Ajaar World</h3>
         </a>
       </div>
