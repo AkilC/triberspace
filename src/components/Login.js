@@ -7,7 +7,7 @@ export const Login = () => {
       <div className="container">
         <div className="div">
           <div className="frame">
-            <div className="text-wrapper">Your Logo</div>
+            <div className="text-wrapper"><a href="/">Your Logo</a></div>
           </div>
         </div>
         <div className="form-wrapper">
