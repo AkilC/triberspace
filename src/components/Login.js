@@ -26,9 +26,9 @@ export const Login = () => {
                     <input type="password" class="form-control" id="password" placeholder="Enter your password" />
                   </div>
                 <div className="recovery">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label class="form-check-label" for="flexCheckDefault">
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label className="form-check-label" for="flexCheckDefault">
                       Remember me?
                     </label>
                   </div>
