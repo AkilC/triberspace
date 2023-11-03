@@ -17,14 +17,14 @@ export const Login = () => {
                 <div className="text-wrapper-2">Log in</div>
               </div>
               <div className="frame-3">
-                <div class="w-100 mb-3" >
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" />
-                  </div>
-                  <div class="w-100 mb-3" >
-                    <label for="exampleFormControlInput2" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter your password" />
-                  </div>
+                <div class="w-100 mb-1" >
+                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" />
+                </div>
+                <div class="w-100 mb-1" >
+                  <label for="exampleFormControlInput2" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter your password" />
+                </div>
                 <div className="recovery">
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />

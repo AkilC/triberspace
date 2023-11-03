@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Login } from "./components/Login";
+import { Register } from "./components/Register";
 
 function Container() {
   const videoRef = React.useRef(null);
@@ -29,7 +30,9 @@ function Container() {
           <a href="/login">
             <button className="button button-outline">Log In</button>
           </a>
-          <button className="button button-filled">Sign Up</button>
+          <a href="/register">
+            <button className="button button-filled">Sign Up</button>
+          </a>
         </div>
       </div>
 
@@ -78,8 +81,9 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route key="login" path="/" element={<Container />} />
+        <Route key="home" path="/" element={<Container />} />
         <Route key="login" path="/login" element={<Login />} />
+        <Route key="register" path="/register" element={<Register />} />
       </Routes>
     </>
   );
