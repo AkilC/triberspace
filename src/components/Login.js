@@ -1,43 +1,48 @@
 import React from "react";
-import { GroupWrapper } from "./GroupWrapper";
+import "../forms.css";
 
 export const Login = () => {
   return (
     <div className="login">
       <div className="container">
-        <div className="logo">
+        <div className="div">
           <div className="frame">
             <div className="text-wrapper">Your Logo</div>
           </div>
         </div>
         <div className="form-wrapper">
           <div className="form">
-            <div className="div">
+            <div className="frame-2">
               <div className="div-wrapper">
                 <div className="text-wrapper-2">Log in</div>
               </div>
-              <div className="frame-2">
-                <GroupWrapper />
-                <div className="overlap-group-wrapper">
-                  <div className="overlap-group">
-                    <GroupWrapper className="group-21" groupText="Enter your Password" text="Password" />
-                    <img className="invisible" alt="Invisible" src="invisible-1.svg" />
+              <div className="frame-3">
+                <div class="w-100 mb-3" >
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" />
                   </div>
-                </div>
-                <div className="group-2">
-                  <div className="rectangle" />
-                  <div className="text-wrapper-3">Rememebr me</div>
+                  <div class="w-100 mb-3" >
+                    <label for="exampleFormControlInput2" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password" />
+                  </div>
+                <div className="recovery">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Remember me?
+                    </label>
+                  </div>
                   <div className="text-wrapper-4">Forgot Password ?</div>
                 </div>
-                <div className="overlap-wrapper">
-                  <div className="overlap">
-                    <div className="text-wrapper-5">Login</div>
+                <div className="overlap-group-wrapper">
+                  <div className="overlap-group">
+                    <div className="text-wrapper-7">Login</div>
                   </div>
                 </div>
               </div>
-              <p className="don-y-have-an">
-                <span className="span">Don’y have an Account ?</span>
-                <span className="text-wrapper-6">&nbsp;&nbsp;Register</span>
+              <p className="don-t-have-an">
+                <span className="span">Don’t have an Account?</span>
+                <span className="text-wrapper-8">&nbsp;&nbsp;Register</span>
               </p>
             </div>
           </div>
@@ -46,3 +51,6 @@ export const Login = () => {
     </div>
   );
 };
+
+
+
