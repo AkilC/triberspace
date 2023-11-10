@@ -42,7 +42,7 @@ function Container() {
         <div className="text-section">
           <h1 className="large-title">triber.space</h1>
           <p className="body-copy">
-            Find your tribe across a universe of immersive content worlds.
+            Find your tribe across a universe of immersive content spaces.
           </p>
         </div>
 
