@@ -10,6 +10,11 @@ export const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match.");
+      return; // Early return to prevent the rest of the function from executing
+    }
+  
     try {
       const response = await axios.post("http://localhost:3001/register", {
         email,
@@ -20,14 +25,6 @@ export const Register = () => {
       }
     } catch (error) {
       setMessage(error.response.data.error || "Registration failed.");
-    }
-
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match.");
-    } else {
-      // Passwords match, proceed with setting the password or further form submission steps
-      setMessage("");
-      // Code to set the password or continue with registration
     }
   };
 
