@@ -1,0 +1,187 @@
+.navbar {
+  align-items: center;
+  background-color: #1e1e1e;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #3a3a3a;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 64px;
+  justify-content: center;
+  position: relative;
+}
+
+.navbar .content {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  position: relative;
+}
+
+.navbar .content-bar {
+  align-items: center;
+  display: flex;
+  gap: 9.57px;
+  position: relative;
+  width: 350px;
+}
+
+.navbar .logo {
+  height: 30px;
+  position: relative;
+  width: 42.05px;
+}
+
+.navbar .text {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 28.7px;
+  font-weight: 400;
+  letter-spacing: -0.32px;
+  line-height: 28.7px;
+  margin-top: -0.7px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.navbar .search-bar {
+  flex: 1;
+  flex-grow: 1;
+  height: 36px;
+  max-width: 540px;
+  position: relative;
+}
+
+.navbar .div {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  position: relative;
+  width: 350px;
+}
+
+.navbar .TP-wrapper {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  position: relative;
+}
+
+.navbar .TP {
+  height: 34px;
+  position: relative;
+  width: 34px;
+}
+
+.navbar .text-wrapper {
+  align-self: stretch;
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 22.2px;
+  font-weight: 600;
+  letter-spacing: -0.24px;
+  line-height: 16.7px;
+  margin-top: -1px;
+  position: relative;
+  width: 62px;
+}
+
+.navbar .icon-set-instance {
+  flex: 0 0 auto !important;
+}
+
+.navbar .profile-area {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 22px;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.navbar .lorem-wrapper {
+  all: unset;
+  align-items: center;
+  border: 3px solid;
+  border-color: #ffffff;
+  border-radius: 12px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 16px 24px;
+  position: relative;
+  width: 100px;
+}
+
+.navbar .lorem {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -3px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.navbar .div-wrapper {
+  all: unset;
+  align-items: center;
+  background-color: #3e4448;
+  border-radius: 12px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 16px 24px;
+  position: relative;
+  width: 100px;
+}
+
+.navbar .lorem-2 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: -4px;
+  margin-right: -4px;
+  margin-top: -1px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.navbar.authenticated {
+  padding: 18px 36px;
+}
+
+.navbar.unauthenticated {
+  padding: 22px 40px;
+}
+
+.navbar.authenticated .content {
+  align-self: stretch;
+  margin-bottom: -6px;
+  margin-top: -6px;
+  width: 100%;
+}
+
+.navbar.unauthenticated .content {
+  margin-bottom: -15.5px;
+  margin-top: -15.5px;
+  width: 1518.62px;
+}

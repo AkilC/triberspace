@@ -1,0 +1,1 @@
+export { IconMarketplace } from "./IconMarketplace";

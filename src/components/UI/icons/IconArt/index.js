@@ -1,0 +1,1 @@
+export { IconArt } from "./IconArt";

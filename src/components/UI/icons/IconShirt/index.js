@@ -1,0 +1,1 @@
+export { IconShirt } from "./IconShirt";

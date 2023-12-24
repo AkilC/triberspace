@@ -1,0 +1,47 @@
+.icon-set {
+  align-items: center;
+  background-color: #3e4448;
+  border-radius: 48px;
+  display: inline-flex;
+  gap: 8px;
+  height: 40px;
+  justify-content: center;
+  padding: 8px 16px;
+  position: relative;
+}
+
+.icon-set .icons-instance {
+  flex: 0 0 auto !important;
+  gap: 2.91px 2.91px !important;
+  margin-bottom: -4px !important;
+  margin-top: -4px !important;
+  padding: 5.82px !important;
+}
+
+.icon-set .design-component-instance-node {
+  gap: 1.45px 2px !important;
+  height: 20.36px !important;
+  width: 20.36px !important;
+}
+
+.icon-set .icons-2 {
+  background-color: #ffffff !important;
+  border-radius: 2.87px !important;
+  height: 9.45px !important;
+  width: 9.45px !important;
+}
+
+.icon-set .icons-3 {
+  background-color: #ffffff !important;
+  border-radius: 2.87px !important;
+  height: 9.45px !important;
+  margin-bottom: -0.55px !important;
+  width: 9.45px !important;
+}
+
+.icon-set .icon-instance-node {
+  flex: 0 0 auto !important;
+  margin-bottom: -4px !important;
+  margin-top: -4px !important;
+  position: relative !important;
+}

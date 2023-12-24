@@ -1,0 +1,1 @@
+export { IconStore } from "./IconStore";

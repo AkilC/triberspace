@@ -1,0 +1,572 @@
+.cards {
+  flex-direction: column;
+  position: relative;
+}
+
+.cards .image {
+  position: relative;
+}
+
+.cards .rectangle {
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  height: 159px;
+}
+
+.cards .content-wrapper-3 {
+  align-items: flex-start;
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.cards .title-and-detail {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 53px;
+  position: relative;
+  width: 281.82px;
+}
+
+.cards .text-wrapper-3 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.26px;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards .creator-name-wrapper {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  justify-content: center;
+  position: relative;
+}
+
+.cards .text-wrapper-4 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.18px;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards .creator-name-wrapper-2 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  position: relative;
+}
+
+.cards .current-users {
+  display: inline-flex;
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.cards .store-name {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards .img-2 {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.cards .name-wrapper {
+  position: relative;
+}
+
+.cards .current-users-2 {
+  align-items: flex-start;
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.cards .text-wrapper-5 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.26px;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards .title {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.cards .text-wrapper-6 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  height: 24px;
+  letter-spacing: -0.26px;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: 336px;
+}
+
+.cards .people-wrapper {
+  align-items: flex-end;
+  display: inline-flex;
+  flex: 0 0 auto;
+  margin-left: -56px;
+  position: relative;
+}
+
+.cards .text-wrapper-7 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  height: 24px;
+  letter-spacing: -0.26px;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: 32px;
+}
+
+.cards .person {
+  height: 24px;
+  position: relative;
+  width: 24px;
+}
+
+.cards .text-wrapper-8 {
+  align-self: stretch;
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 20px;
+  font-weight: 400;
+  height: 24px;
+  letter-spacing: -0.22px;
+  line-height: 24px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.cards .side-menu-item-2 {
+  align-items: center;
+  align-self: stretch;
+  border: 1px solid;
+  border-color: #ffffff;
+  border-radius: 49px;
+  display: flex;
+  gap: 24px;
+  height: 48px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px;
+  position: relative;
+  width: 100%;
+}
+
+.cards .text-wrapper-9 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.26px;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards .image-2 {
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  height: 297px;
+  position: relative;
+  width: 245px;
+}
+
+.cards .button-3 {
+  align-self: stretch !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+}
+
+.cards .content-2 {
+  -webkit-backdrop-filter: blur(5px) brightness(100%);
+  align-items: center;
+  align-self: stretch;
+  backdrop-filter: blur(5px) brightness(100%);
+  background-color: #00000099;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  padding: 12px 8px;
+  position: relative;
+  width: 100%;
+}
+
+.cards .text-wrapper-10 {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  position: relative;
+}
+
+.cards .name-wrapper-2 {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  width: 147px;
+}
+
+.cards .text-wrapper-11 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.22px;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards .text-wrapper-12 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.18px;
+  line-height: 24px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards .price-wrapper {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  position: relative;
+}
+
+.cards .TRD-logo {
+  height: 14px;
+  position: relative;
+  width: 12px;
+}
+
+.cards .text-wrapper-13 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.18px;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards.shop-card-tall {
+  align-items: center;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  display: flex;
+  gap: 16px;
+  height: 442px;
+  justify-content: flex-end;
+  width: 288px;
+}
+
+.cards.space-small {
+  align-items: center;
+  display: inline-flex;
+  gap: 16px;
+}
+
+.cards.world-tile {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.cards.store {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.cards.space {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  width: 336px;
+}
+
+.cards.shop-card-short {
+  align-items: center;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  display: flex;
+  gap: 16px;
+  height: 210px;
+  justify-content: flex-end;
+  width: 288px;
+}
+
+.cards.event-tile {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.cards.shop-card-tall .image {
+  width: 282px;
+}
+
+.cards.space-small .image {
+  width: 282px;
+}
+
+.cards.world-tile .image {
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  height: 158.63px;
+  width: 282px;
+}
+
+.cards.store .image {
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  height: 158.63px;
+  width: 282px;
+}
+
+.cards.space .image {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.26px;
+  line-height: 24px;
+  margin-top: -1px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.cards.shop-card-short .image {
+  width: 282px;
+}
+
+.cards.event-tile .image {
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  height: 158.63px;
+  width: 282px;
+}
+
+.cards.shop-card-tall .content-wrapper-3 {
+  display: flex;
+}
+
+.cards.space-small .content-wrapper-3 {
+  display: flex;
+}
+
+.cards.world-tile .content-wrapper-3 {
+  display: flex;
+  justify-content: space-between;
+  width: 282px;
+}
+
+.cards.store .content-wrapper-3 {
+  display: flex;
+  width: 282px;
+}
+
+.cards.space .content-wrapper-3 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  width: 100%;
+}
+
+.cards.shop-card-short .content-wrapper-3 {
+  display: flex;
+}
+
+.cards.event-tile .content-wrapper-3 {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cards.shop-card-tall .current-users {
+  align-items: center;
+  gap: 4px;
+}
+
+.cards.space-small .current-users {
+  align-items: center;
+  gap: 4px;
+}
+
+.cards.world-tile .current-users {
+  align-items: center;
+  gap: 4px;
+}
+
+.cards.store .current-users {
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cards.space .current-users {
+  align-items: center;
+  gap: 4px;
+}
+
+.cards.shop-card-short .current-users {
+  align-items: center;
+  gap: 4px;
+}
+
+.cards.event-tile .current-users {
+  align-items: center;
+  gap: 4px;
+}
+
+.cards.shop-card-tall .store-name {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.26px;
+}
+
+.cards.space-small .store-name {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.26px;
+}
+
+.cards.world-tile .store-name {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.26px;
+}
+
+.cards.store .store-name {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.26px;
+}
+
+.cards.space .store-name {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.26px;
+}
+
+.cards.shop-card-short .store-name {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.26px;
+}
+
+.cards.event-tile .store-name {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.22px;
+}
+
+.cards.world-tile .name-wrapper {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+.cards.space .name-wrapper {
+  align-self: stretch;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  height: 336px;
+  width: 100%;
+}
+
+.cards.shop-card-tall .current-users-2 {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.cards.space-small .current-users-2 {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.cards.world-tile .current-users-2 {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.cards.store .current-users-2 {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.cards.space .current-users-2 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.cards.shop-card-short .current-users-2 {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.cards.event-tile .current-users-2 {
+  display: inline-flex;
+  gap: 4px;
+}

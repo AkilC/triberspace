@@ -1,0 +1,1 @@
+export { IconNotif } from "./IconNotif";

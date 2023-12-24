@@ -1,0 +1,1 @@
+export { IconThumbUo } from "./IconThumbUo";

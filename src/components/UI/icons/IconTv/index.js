@@ -1,0 +1,1 @@
+export { IconTv } from "./IconTv";

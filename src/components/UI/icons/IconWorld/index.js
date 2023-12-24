@@ -1,0 +1,1 @@
+export { IconWorld } from "./IconWorld";

@@ -1,0 +1,188 @@
+.concrete-component-node .instance-node-2 {
+  height: 44px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 44px !important;
+}
+
+.concrete-component-node {
+  flex-wrap: wrap;
+  gap: 4px 4px;
+  padding: 8px;
+  position: relative;
+}
+
+.concrete-component-node .frame {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 2px;
+  height: 28px;
+  position: relative;
+  width: 28px;
+}
+
+.concrete-component-node .rectangle-2 {
+  background-color: #444444;
+  border-radius: 3.95px;
+  height: 13px;
+  position: relative;
+  width: 13px;
+}
+
+.concrete-component-node .union {
+  height: 23px;
+  margin-left: -0.5px;
+  margin-right: -0.5px;
+  position: relative;
+  width: 29px;
+}
+
+.concrete-component-node.icon-location {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-marketplace {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-support {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-heart {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-chat {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-calendar-check {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-arrow {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-data {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-star {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-thumb-down {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-social {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-art {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-shirt {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-main-menu {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-world {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-store {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-notif {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-chevron {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-calendar {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-home {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-cash {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-controller {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-profile {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-video {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-TV {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-settings {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-person {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-thumb-uo {
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.concrete-component-node.icon-sign-out {
+  align-items: center;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  width: 44px;
+}

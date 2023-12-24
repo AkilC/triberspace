@@ -1,0 +1,76 @@
+.side-menu-item {
+  align-items: center;
+  border-radius: 12px;
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  padding: 12px;
+  position: relative;
+  width: 258px;
+}
+
+.side-menu-item .img {
+  position: relative;
+}
+
+.side-menu-item .home-2 {
+  color: #ffffff;
+  font-family: "Work Sans", Helvetica;
+  font-size: 24px;
+  letter-spacing: -0.26px;
+  line-height: 24px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.side-menu-item.inactive {
+  background-color: #1e1e1e;
+}
+
+.side-menu-item.active {
+  background-color: #4c5458;
+}
+
+.side-menu-item .state-active {
+  width: 28px;
+}
+
+.side-menu-item .profile {
+  height: 28px;
+  width: 28px;
+}
+
+.side-menu-item .home {
+  height: 28px;
+  width: 28px;
+}
+
+.side-menu-item .calendar {
+  height: 28px;
+  width: 28px;
+}
+
+.side-menu-item .avatar {
+  width: 28px;
+}
+
+.side-menu-item .state-active.market {
+  height: 28px;
+}
+
+.side-menu-item .state-inactive.market {
+  height: 30px;
+  margin-bottom: -1px;
+  margin-left: -1px;
+  margin-top: -1px;
+  width: 30px;
+}
+
+.side-menu-item.inactive .home-2 {
+  font-weight: 500;
+}
+
+.side-menu-item.active .home-2 {
+  font-weight: 600;
+}

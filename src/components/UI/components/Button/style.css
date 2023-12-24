@@ -1,0 +1,89 @@
+.button {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px;
+  position: relative;
+}
+
+.button .lorem-3 {
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  line-height: 24px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.button.side-menu-button {
+  background-color: #dee8ec;
+  border-radius: 12px;
+  width: 266px;
+}
+
+.button.secondary-CTA-small {
+  border: 3px solid;
+  border-color: #ffffff;
+  border-radius: 36px;
+  height: 40px;
+  width: 116px;
+}
+
+.button.secondary-CTA {
+  border: 3px solid;
+  border-color: #ffffff;
+  border-radius: 36px;
+  width: 474px;
+}
+
+.button.primary-CTA-small {
+  background-color: #dee8ec;
+  border-radius: 36px;
+  height: 40px;
+  width: 116px;
+}
+
+.button.primary-CTA {
+  background-color: #dee8ec;
+  border-radius: 36px;
+  width: 474px;
+}
+
+.button.side-menu-button .lorem-3 {
+  color: #1e1e1e;
+  font-size: 24px;
+  letter-spacing: -0.26px;
+  margin-top: -1px;
+}
+
+.button.secondary-CTA-small .lorem-3 {
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: -0.22px;
+  margin-bottom: -1px;
+  margin-top: -7px;
+}
+
+.button.secondary-CTA .lorem-3 {
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: -0.22px;
+  margin-top: -3px;
+}
+
+.button.primary-CTA-small .lorem-3 {
+  color: #1e1e1e;
+  font-size: 20px;
+  letter-spacing: -0.22px;
+  margin-bottom: -3px;
+  margin-top: -5px;
+}
+
+.button.primary-CTA .lorem-3 {
+  color: #1e1e1e;
+  font-size: 20px;
+  letter-spacing: -0.22px;
+  margin-top: -1px;
+}
