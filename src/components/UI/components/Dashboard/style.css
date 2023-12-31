@@ -36,3 +36,8 @@
   flex: 1; /* Allow this container to take up remaining space */
   overflow-y: auto;
 }
+
+.dashboard .home-instance {
+  flex: 1; /* Allow this container to take up remaining space */
+  overflow-y: auto;
+}

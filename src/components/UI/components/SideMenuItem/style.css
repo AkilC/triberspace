@@ -36,30 +36,30 @@
   width: 28px;
 }
 
-.side-menu-item .profile {
+.side-menu-item .option-profile {
   height: 28px;
   width: 28px;
 }
 
-.side-menu-item .home {
+.side-menu-item .option-home {
   height: 28px;
   width: 28px;
 }
 
-.side-menu-item .calendar {
+.side-menu-item .option-calendar {
   height: 28px;
   width: 28px;
 }
 
-.side-menu-item .avatar {
+.side-menu-item .option-avatar {
   width: 28px;
 }
 
-.side-menu-item .state-active.market {
+.side-menu-item .state-active.option-market {
   height: 28px;
 }
 
-.side-menu-item .state-inactive.market {
+.side-menu-item .state-inactive.option-market {
   height: 30px;
   margin-bottom: -1px;
   margin-left: -1px;

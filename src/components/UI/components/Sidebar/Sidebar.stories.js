@@ -15,6 +15,7 @@ export const Default = {
   args: {
     userState: "authenticated",
     className: {},
-    chevron: "https://c.animaapp.com/8TF7hHQo/img/chevron-2.svg",
+    sideMenuItemState: "inactive",
+    chevron: "https://c.animaapp.com/BWnJGvur/img/chevron-1.svg",
   },
 };

@@ -5,19 +5,24 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 
 import PropTypes from "prop-types";
 import React from "react";
-import { Icons8 } from "../../icons/Icons8";
+import { Icons2 } from "../../icons/Icons2";
 import { Button } from "../Button";
 import { SideMenuItem } from "../SideMenuItem";
 import "./style.css";
 
-export const Sidebar = ({ userState, className, chevron = "https://c.animaapp.com/8TF7hHQo/img/chevron-2.svg" }) => {
+export const Sidebar = ({
+  userState,
+  className,
+  sideMenuItemState = "inactive",
+  chevron = "https://c.animaapp.com/BWnJGvur/img/chevron-1.svg",
+}) => {
   return (
     <div className={`sidebar user-state-${userState} ${className}`}>
       {userState === "authenticated" && (
         <>
           <div className="content-wrapper">
             <div className="section">
-              <SideMenuItem className="side-menu-item-instance" option="home" state="inactive" />
+              <SideMenuItem className="side-menu-item-instance" option="home" state="active" />
               <SideMenuItem className="side-menu-item-instance" option="market" state="inactive" />
               <SideMenuItem className="side-menu-item-instance" option="profile" state="inactive" />
               <SideMenuItem className="side-menu-item-instance" option="avatar" state="inactive" />
@@ -64,7 +69,7 @@ export const Sidebar = ({ userState, className, chevron = "https://c.animaapp.co
           <div className="section">
             <div className="header-wrapper-2">
               <div className="text-wrapper-2">My Tribes</div>
-              <Icons8 className="icons-8" />
+              <Icons2 className="icons-2-instance" />
             </div>
           </div>
           <div className="no-auth-section">
@@ -78,5 +83,6 @@ export const Sidebar = ({ userState, className, chevron = "https://c.animaapp.co
 
 Sidebar.propTypes = {
   userState: PropTypes.oneOf(["authenticated", "unauthenticated"]),
+  sideMenuItemState: PropTypes.string,
   chevron: PropTypes.string,
 };

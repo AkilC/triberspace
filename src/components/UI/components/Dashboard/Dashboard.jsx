@@ -4,7 +4,7 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 */
 
 import React from "react";
-import { HomeSpaces } from "../HomeSpaces";
+import { Home } from "../Home";
 import { Navbar } from "../Navbar";
 import { Sidebar } from "../Sidebar";
 import "./style.css";
@@ -25,29 +25,32 @@ export const Dashboard = () => {
           userState="authenticated"
         />
         <div className="page">
-          <HomeSpaces
-            cardsImg="https://c.animaapp.com/8TF7hHQo/img/personicon-46.svg"
-            cardsImgClassName="home-spaces-4"
-            cardsImgClassNameOverride="home-spaces-5"
-            cardsPersonIcon="https://c.animaapp.com/8TF7hHQo/img/personicon-46.svg"
-            cardsPersonIcon1="https://c.animaapp.com/8TF7hHQo/img/personicon-46.svg"
-            cardsPersonIcon10="https://c.animaapp.com/8TF7hHQo/img/personicon-16@2x.png"
-            cardsPersonIcon11="https://c.animaapp.com/8TF7hHQo/img/personicon-48.svg"
-            cardsPersonIcon2="https://c.animaapp.com/8TF7hHQo/img/personicon-46.svg"
-            cardsPersonIcon3="https://c.animaapp.com/8TF7hHQo/img/personicon-16@2x.png"
-            cardsPersonIcon4="https://c.animaapp.com/8TF7hHQo/img/personicon-16@2x.png"
-            cardsPersonIcon5="https://c.animaapp.com/8TF7hHQo/img/personicon-16@2x.png"
-            cardsPersonIcon6="https://c.animaapp.com/8TF7hHQo/img/personicon-16@2x.png"
-            cardsPersonIcon7="https://c.animaapp.com/8TF7hHQo/img/personicon-16@2x.png"
-            cardsPersonIcon8="https://c.animaapp.com/8TF7hHQo/img/personicon-16@2x.png"
-            cardsPersonIcon9="https://c.animaapp.com/8TF7hHQo/img/personicon-16@2x.png"
-            cardsPersonIconClassName="home-spaces-2"
-            cardsPersonIconClassName1="home-spaces-6"
-            cardsPersonIconClassName2="home-spaces-7"
-            cardsPersonIconClassName3="home-spaces-8"
-            cardsPersonIconClassName4="home-spaces-9"
-            cardsPersonIconClassNameOverride="home-spaces-3"
-            className="home-spaces-instance"
+        <Home
+            cardsImg="https://c.animaapp.com/BWnJGvur/img/personicon-40.svg"
+            cardsImgClassName="home-5"
+            cardsImgClassNameOverride="home-6"
+            cardsPersonIcon="https://c.animaapp.com/BWnJGvur/img/personicon-40.svg"
+            cardsPersonIcon1="https://c.animaapp.com/BWnJGvur/img/personicon-40.svg"
+            cardsPersonIcon10="https://c.animaapp.com/BWnJGvur/img/personicon-48@2x.png"
+            cardsPersonIcon11="https://c.animaapp.com/BWnJGvur/img/personicon-36.svg"
+            cardsPersonIcon2="https://c.animaapp.com/BWnJGvur/img/personicon-40.svg"
+            cardsPersonIcon3="https://c.animaapp.com/BWnJGvur/img/personicon-48@2x.png"
+            cardsPersonIcon4="https://c.animaapp.com/BWnJGvur/img/personicon-48@2x.png"
+            cardsPersonIcon5="https://c.animaapp.com/BWnJGvur/img/personicon-48@2x.png"
+            cardsPersonIcon6="https://c.animaapp.com/BWnJGvur/img/personicon-48@2x.png"
+            cardsPersonIcon7="https://c.animaapp.com/BWnJGvur/img/personicon-48@2x.png"
+            cardsPersonIcon8="https://c.animaapp.com/BWnJGvur/img/personicon-48@2x.png"
+            cardsPersonIcon9="https://c.animaapp.com/BWnJGvur/img/personicon-48@2x.png"
+            cardsPersonIconClassName="home-3"
+            cardsPersonIconClassName1="home-7"
+            cardsPersonIconClassName2="home-8"
+            cardsPersonIconClassName3="home-9"
+            cardsPersonIconClassName4="home-10"
+            cardsPersonIconClassNameOverride="home-4"
+            className="home-instance"
+            content="spaces"
+            tabsListItemState="inactive"
+            tabsListItemState1="active"
           />
         </div>
       </div>

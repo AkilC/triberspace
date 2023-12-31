@@ -1,0 +1,10 @@
+.tabs {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 36px;
+  position: relative;
+}
+
+.tabs .list-item-instance {
+  flex: 0 0 auto !important;
+}

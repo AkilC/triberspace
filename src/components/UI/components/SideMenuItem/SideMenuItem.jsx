@@ -11,28 +11,28 @@ export const SideMenuItem = ({ state, option, className }) => {
   return (
     <div className={`side-menu-item ${state} ${className}`}>
       <img
-        className={`img state-${state} ${option}`}
+        className={`img state-${state} option-${option}`}
         alt="Home"
         src={
           option === "home" && state === "active"
-            ? "https://c.animaapp.com/8TF7hHQo/img/-home--4@2x.png"
+            ? "https://c.animaapp.com/BWnJGvur/img/-home--5@2x.png"
             : option === "market" && state === "inactive"
-            ? "https://c.animaapp.com/8TF7hHQo/img/-cart--5@2x.png"
+            ? "https://c.animaapp.com/BWnJGvur/img/-cart--5@2x.png"
             : state === "active" && option === "market"
-            ? "https://c.animaapp.com/8TF7hHQo/img/-cart--2@2x.png"
+            ? "https://c.animaapp.com/BWnJGvur/img/-cart--4@2x.png"
             : option === "profile" && state === "inactive"
-            ? "https://c.animaapp.com/8TF7hHQo/img/profile-5.svg"
+            ? "https://c.animaapp.com/BWnJGvur/img/profile-5.svg"
             : option === "profile" && state === "active"
-            ? "https://c.animaapp.com/8TF7hHQo/img/profile-2.svg"
+            ? "https://c.animaapp.com/BWnJGvur/img/profile-4.svg"
             : option === "avatar" && state === "inactive"
-            ? "https://c.animaapp.com/8TF7hHQo/img/-male--4.svg"
+            ? "https://c.animaapp.com/BWnJGvur/img/-male--4.svg"
             : state === "active" && option === "avatar"
-            ? "https://c.animaapp.com/8TF7hHQo/img/-male--2.svg"
+            ? "https://c.animaapp.com/BWnJGvur/img/-male--3.svg"
             : option === "calendar" && state === "inactive"
-            ? "https://c.animaapp.com/8TF7hHQo/img/-calendar--4@2x.png"
+            ? "https://c.animaapp.com/BWnJGvur/img/-calendar--4@2x.png"
             : state === "active" && option === "calendar"
-            ? "https://c.animaapp.com/8TF7hHQo/img/-calendar--2@2x.png"
-            : "https://c.animaapp.com/8TF7hHQo/img/-home--5@2x.png"
+            ? "https://c.animaapp.com/BWnJGvur/img/-calendar--3@2x.png"
+            : "https://c.animaapp.com/BWnJGvur/img/-home--3@2x.png"
         }
       />
       <div className="home-2">

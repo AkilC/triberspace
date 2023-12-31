@@ -8,12 +8,7 @@ import React from "react";
 import { IconSet } from "../IconSet";
 import "./style.css";
 
-export const Navbar = ({
-  state,
-  className,
-  searchBar = "https://c.animaapp.com/8TF7hHQo/img/search-bar-3.svg",
-  TP = "https://c.animaapp.com/8TF7hHQo/img/tp-2.svg",
-}) => {
+export const Navbar = ({ state, className, TP = "https://c.animaapp.com/BWnJGvur/img/tp-1.svg" }) => {
   return (
     <div className={`navbar ${state} ${className}`}>
       <div className="content">
@@ -23,13 +18,13 @@ export const Navbar = ({
             alt="Logo"
             src={
               state === "unauthenticated"
-                ? "https://c.animaapp.com/8TF7hHQo/img/logo-2@2x.png"
-                : "https://c.animaapp.com/8TF7hHQo/img/logo-3@2x.png"
+                ? "https://c.animaapp.com/BWnJGvur/img/logo-2@2x.png"
+                : "https://c.animaapp.com/BWnJGvur/img/logo-3@2x.png"
             }
           />
           <div className="text">triber.space</div>
         </div>
-        <img className="search-bar" alt="Search bar" src={searchBar} />
+        <img className="search-bar" alt="Search bar" src="https://c.animaapp.com/BWnJGvur/img/search-bar-3.svg" />
         <div className="div">
           {state === "authenticated" && (
             <>
@@ -59,6 +54,5 @@ export const Navbar = ({
 
 Navbar.propTypes = {
   state: PropTypes.oneOf(["authenticated", "unauthenticated"]),
-  searchBar: PropTypes.string,
   TP: PropTypes.string,
 };

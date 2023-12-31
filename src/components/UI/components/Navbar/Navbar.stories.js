@@ -15,7 +15,6 @@ export const Default = {
   args: {
     state: "authenticated",
     className: {},
-    searchBar: "https://c.animaapp.com/8TF7hHQo/img/search-bar-3.svg",
-    TP: "https://c.animaapp.com/8TF7hHQo/img/tp-2.svg",
+    TP: "https://c.animaapp.com/BWnJGvur/img/tp-1.svg",
   },
 };
