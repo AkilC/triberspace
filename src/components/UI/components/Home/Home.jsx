@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Cards } from "../Cards";
 import { Tabs } from "../Tabs";
 import "./style.css";
+import EventCard from "../../../../ui-components/EventCard";
+import '@aws-amplify/ui-react/styles.css'
 
 export const Home = ({
   content,
@@ -73,11 +75,7 @@ export const Home = ({
               <div className="header">Watch Parties</div>
             </div>
             <div className="div-2">
-              <Cards
-                className="instance-node-2"
-                personIcon={cardsPersonIcon}
-                personIconClassName="cards-instance"
-                type="event-tile"
+              <EventCard
               />
               <Cards
                 className="instance-node-2"

@@ -1,0 +1,22 @@
+type World @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  posts: [Space] @hasMany(indexName: "byWorld", fields: ["id"])
+  Spaces: [Space] @hasMany(indexName: "byWorld", fields: ["id"])
+}
+
+type Space @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  comments: [Comment] @hasMany(indexName: "bySpace", fields: ["id"])
+  wID: ID! @index(name: "byWorld")
+  World: World @belongsTo(fields: ["wID"])
+}
+
+type Comment @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  content: String!
+  sID: ID! @index(name: "bySpace")
+  Space: Space @belongsTo(fields: ["sID"])
+}
+ 
