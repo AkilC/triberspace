@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Flex, Text, View } from "@aws-amplify/ui-react";
-import { getOverrideProps, mergeVariantsAndOverrides } from "../ui-components/utils";
+import { getOverrideProps, mergeVariantsAndOverrides } from "../../ui-components/utils";
 
 export default function TribeSideButton(props) {
   const {

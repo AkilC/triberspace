@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Flex, Text } from "@aws-amplify/ui-react";
-import MyIcon from "../ui-components/MyIcon";
-import { getOverrideProps, mergeVariantsAndOverrides } from "../ui-components/utils";
+import MyIcon from "../../ui-components/MyIcon";
+import { getOverrideProps, mergeVariantsAndOverrides } from "../../ui-components/utils";
 
 export default function SideButton(props) {
   const {

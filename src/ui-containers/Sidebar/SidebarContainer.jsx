@@ -1,8 +1,8 @@
 import * as React from "react";
-import { getOverrideProps } from "../ui-components/utils";
+import { getOverrideProps } from "../../ui-components/utils";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import TribeSideButton from "./TribeSideButton";
-import CardsPremiumButton from "../ui-components/CardsPremiumButton";
+import CardsPremiumButton from "../../ui-components/CardsPremiumButton";
 import SideButton from "./SideButton";
 export default function SidebarAuthenticated(props) {
   const { overrides, ...rest } = props;
@@ -12,6 +12,14 @@ export default function SidebarAuthenticated(props) {
   const handleTabClick = (tab) => {
     onTabChange(tab);
   };
+
+  const tribes = [
+    { id: "tribe1", name: "Tribe 1" },
+    { id: "tribe2", name: "Tribe 2" },
+    { id: "tribe3", name: "Tribe 3" },
+    // Add more tribes as needed
+  ];
+  
   return (
     <Flex
       gap="10px"
@@ -163,28 +171,19 @@ export default function SidebarAuthenticated(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             {...getOverrideProps(overrides, "Categories")}
-          >
-            <TribeSideButton
-                label="Tribe 1"
-                active={activeTab === 'Tribe'}
+            >
+            {tribes.map((tribe) => (
+                <TribeSideButton
+                key={tribe.id}
+                label={tribe.name}
+                active={activeTab === tribe.id}
                 width="100%"
-                onClick={() => onTabChange('Tribe')}
-            />
-            <TribeSideButton
-                label="Tribe 2"
-                active={activeTab === 'Tribe'}
-                width="100%"
-                onClick={() => onTabChange('Tribe')}
-            />
-            <TribeSideButton
-                label="Tribe 3"
-                active={activeTab === 'Tribe'}
-                width="100%"
-                onClick={() => onTabChange('Tribe')}
-            />
+                onClick={() => onTabChange(tribe.id)}
+                />
+            ))}
+            </Flex>
+            </Flex>
           </Flex>
-        </Flex>
-      </Flex>
       <Flex
         gap="10px"
         direction="column"

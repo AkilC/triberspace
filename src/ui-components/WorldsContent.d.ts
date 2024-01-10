@@ -5,7 +5,8 @@
  **************************************************************************/
 
 import * as React from "react";
-import { FlexProps, IconProps, TextProps } from "@aws-amplify/ui-react";
+import { FlexProps, TextProps } from "@aws-amplify/ui-react";
+import { DropdownProps } from "./Dropdown";
 import { WorldCardProps } from "./WorldCard";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
@@ -22,9 +23,7 @@ export declare type WorldsContentOverridesProps = {
     WorldsContent?: PrimitiveOverrideProps<FlexProps>;
     "Header and Sort"?: PrimitiveOverrideProps<FlexProps>;
     "All worlds"?: PrimitiveOverrideProps<TextProps>;
-    Sort?: PrimitiveOverrideProps<FlexProps>;
-    "Sort by"?: PrimitiveOverrideProps<TextProps>;
-    "Vector 11"?: PrimitiveOverrideProps<IconProps>;
+    Dropdown?: DropdownProps;
     "Frame 42"?: PrimitiveOverrideProps<FlexProps>;
     WorldCard38723946?: WorldCardProps;
     WorldCard38723947?: WorldCardProps;

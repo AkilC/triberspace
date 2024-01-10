@@ -2,18 +2,20 @@ import * as React from "react";
 import { useState } from "react";
 import { getOverrideProps } from "../ui-components/utils";
 import NavbarAuthenticated from "../ui-components/NavbarAuthenticated";
-import SidebarContainer from "./SidebarContainer";
+import SidebarContainer from "./Sidebar/SidebarContainer";
 import { Flex } from "@aws-amplify/ui-react";
-import HomeContainer from "./HomeContainer";
-import MarketContainer from "./MarketContainer";
-import ProfileContainer from "./ProfileContainer";
-import AvatarContainer from "./AvatarContainer";
-import CalendarContainer from "./CalendarContainer";
-import TribeContainer from "./TribeContainer";
+import HomeContainer from "./Home/HomeContainer";
+import MarketContainer from "./Market/MarketContainer";
+import ProfileContainer from "./Profile/ProfileContainer";
+import AvatarContainer from "./Avatar/AvatarContainer";
+import CalendarContainer from "./Calendar/CalendarContainer";
+import TribeContainer from "./Tribes/TribeContainer";
 
 export default function Dashboard(props) {
   const { overrides, ...rest } = props;
   const [homeTab, setHomeTab] = useState('Events');
+  const [marketTab, setMarketTab] = useState("Discover");
+  const [tribeTab, setTribeTab] = useState("Overview");
   const [activeTab, setActiveTab] = useState('Home');
 
   let mainContent;
@@ -22,7 +24,7 @@ export default function Dashboard(props) {
       mainContent = <HomeContainer homeTab={homeTab} setHomeTab={setHomeTab}/>;
       break;
     case 'Market':
-      mainContent = <MarketContainer />;
+      mainContent = <MarketContainer marketTab={marketTab} setMarketTab={setMarketTab}/>;
       break;
     case 'Profile':
       mainContent = <ProfileContainer/>;
@@ -33,8 +35,8 @@ export default function Dashboard(props) {
     case 'Calendar':
       mainContent = <CalendarContainer />;
       break;
-    case 'Tribe':
-      mainContent = <TribeContainer />;
+    case 'tribe1':
+      mainContent = <TribeContainer tribeTab={tribeTab} setTribeTab={setTribeTab} />;
       break;
     default:
       mainContent = <HomeContainer />;
@@ -45,7 +47,7 @@ export default function Dashboard(props) {
       gap="0"
       direction="column"
       width="1600px"
-      height="940px"
+      height="100%"
       justifyContent="flex-start"
       alignItems="center"
       overflow="hidden"
@@ -86,7 +88,7 @@ export default function Dashboard(props) {
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Main Content")}
       >
-        <SidebarContainer activeTab={activeTab} onTabChange={setActiveTab} />
+        <SidebarContainer activeTab={activeTab} onTabChange={setActiveTab} height="100%"/>
         {mainContent}
       </Flex>
     </Flex>

@@ -9,12 +9,12 @@ import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Icon, Text, View } from "@aws-amplify/ui-react";
 export default function ShopCardTall(props) {
-  const { overrides, ...rest } = props;
+  const { product, creator, overrides, ...rest } = props;
   return (
     <Flex
       gap="16px"
       direction="column"
-      width="271.5px"
+      width="271px"
       height="442px"
       justifyContent="flex-end"
       alignItems="center"
@@ -43,10 +43,11 @@ export default function ShopCardTall(props) {
         <Flex
           gap="0"
           direction="column"
-          width="unset"
-          height="unset"
+          width="147px"
+          height="48px"
           justifyContent="flex-start"
           alignItems="flex-start"
+          overflow="hidden"
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
@@ -83,7 +84,7 @@ export default function ShopCardTall(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Item name"
+              children={product?.itemName}
               {...getOverrideProps(overrides, "Item name")}
             ></Text>
           </Flex>
@@ -103,10 +104,11 @@ export default function ShopCardTall(props) {
             gap="unset"
             alignItems="unset"
             shrink="0"
+            alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Creator name"
+            children={creator?.name}
             {...getOverrideProps(overrides, "Creator name")}
           ></Text>
         </Flex>

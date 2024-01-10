@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Text, View } from "@aws-amplify/ui-react";
 export default function StoreCard(props) {
-  const { overrides, ...rest } = props;
+  const { store, creator, overrides, ...rest } = props;
   return (
     <Flex
       gap="8px"
@@ -96,7 +96,7 @@ export default function StoreCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Store Name"
+            children={store?.name}
             {...getOverrideProps(overrides, "Store Name")}
           ></Text>
         </Flex>

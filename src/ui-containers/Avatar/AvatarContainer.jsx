@@ -1,7 +1,7 @@
 // AvatarContainer.jsx
 import React, { useContext } from 'react';
-import ContentWrapper from '../ui-components/ContentWrapper';
-import AvatarContent from '../ui-components/AvatarContent';
+import ContentWrapper from '../ContentWrapper';
+import AvatarContent from '../../ui-components/AvatarContent';
 
 const AvatarContainer = ({ activeTab, setActiveTab }) => {
   const handleTabClick = (tabName) => {

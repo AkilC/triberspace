@@ -1,7 +1,7 @@
 // ProfileContainer.jsx
 import React, { useContext } from 'react';
-import ContentWrapper from '../ui-components/ContentWrapper';
-import ProfileContent from "../ui-components/ProfileContent";
+import ContentWrapper from '../ContentWrapper';
+import ProfileContent from "../../ui-components/ProfileContent";
 
 const ProfileContainer = ({ activeTab, setActiveTab }) => {
   const handleTabClick = (tabName) => {

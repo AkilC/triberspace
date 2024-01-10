@@ -33,6 +33,9 @@ export declare type EventCardOverridesProps = {
     Vector?: PrimitiveOverrideProps<IconProps>;
 } & EscapeHatchProps;
 export declare type EventCardProps = React.PropsWithChildren<Partial<FlexProps> & {
+    event?: any;
+    world?: any;
+} & {
     overrides?: EventCardOverridesProps | undefined | null;
 }>;
 export default function EventCard(props: EventCardProps): React.ReactElement;

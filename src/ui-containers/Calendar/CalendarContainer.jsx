@@ -1,7 +1,7 @@
 // CalendarContainer.jsx
 import React, { useContext } from 'react';
-import ContentWrapper from '../ui-components/ContentWrapper';
-import CalendarContent from '../ui-components/CalendarContent';
+import ContentWrapper from '../ContentWrapper';
+import CalendarContent from '../../ui-components/CalendarContent';
 
 const CalendarContainer = ({ activeTab, setActiveTab }) => {
   const handleTabClick = (tabName) => {

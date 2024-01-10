@@ -26,6 +26,9 @@ export declare type StoreCardOverridesProps = {
     "Store Name"?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type StoreCardProps = React.PropsWithChildren<Partial<FlexProps> & {
+    store?: any;
+    creator?: any;
+} & {
     overrides?: StoreCardOverridesProps | undefined | null;
 }>;
 export default function StoreCard(props: StoreCardProps): React.ReactElement;

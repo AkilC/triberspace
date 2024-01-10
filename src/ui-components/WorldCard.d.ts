@@ -30,6 +30,8 @@ export declare type WorldCardOverridesProps = {
     Vector?: PrimitiveOverrideProps<IconProps>;
 } & EscapeHatchProps;
 export declare type WorldCardProps = React.PropsWithChildren<Partial<FlexProps> & {
+    world?: any;
+} & {
     overrides?: WorldCardOverridesProps | undefined | null;
 }>;
 export default function WorldCard(props: WorldCardProps): React.ReactElement;

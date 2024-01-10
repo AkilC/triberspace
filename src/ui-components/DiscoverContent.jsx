@@ -92,7 +92,7 @@ export default function DiscoverContent(props) {
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -102,13 +102,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792126")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093204")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -118,13 +118,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792076")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093254")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -134,13 +134,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792056")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093234")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -150,7 +150,7 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792116")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093284")}
           ></ShopCardTall>
         </Flex>
       </Flex>
@@ -186,8 +186,8 @@ export default function DiscoverContent(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Clothing"
-          {...getOverrideProps(overrides, "Clothing")}
+          children="New Releases"
+          {...getOverrideProps(overrides, "New Releases")}
         ></Text>
         <Flex
           gap="24px"
@@ -206,7 +206,7 @@ export default function DiscoverContent(props) {
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -216,13 +216,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792046")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093224")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -232,13 +232,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792086")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093264")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -248,13 +248,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792036")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093194")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -264,7 +264,7 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792096")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093244")}
           ></ShopCardTall>
         </Flex>
       </Flex>
@@ -300,8 +300,8 @@ export default function DiscoverContent(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Avatars"
-          {...getOverrideProps(overrides, "Avatars")}
+          children="Top Selling"
+          {...getOverrideProps(overrides, "Top Selling")}
         ></Text>
         <Flex
           gap="24px"
@@ -320,7 +320,7 @@ export default function DiscoverContent(props) {
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -330,13 +330,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792136")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093294")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -346,13 +346,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792066")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093184")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -362,13 +362,13 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792106")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093274")}
           ></ShopCardTall>
           <ShopCardTall
             display="flex"
             gap="16px"
             direction="column"
-            width="271.5px"
+            width="271px"
             height="442px"
             justifyContent="flex-end"
             alignItems="center"
@@ -378,7 +378,7 @@ export default function DiscoverContent(props) {
             borderRadius="8px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(217,217,217,1)"
-            {...getOverrideProps(overrides, "ShopCard-Tall38792026")}
+            {...getOverrideProps(overrides, "ShopCard-Tall39093214")}
           ></ShopCardTall>
         </Flex>
       </Flex>

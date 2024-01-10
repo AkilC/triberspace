@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Icon, Text, View } from "@aws-amplify/ui-react";
 export default function WorldCard(props) {
-  const { overrides, ...rest } = props;
+  const { world, overrides, ...rest } = props;
   return (
     <Flex
       gap="8px"
@@ -96,7 +96,7 @@ export default function WorldCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="World Name"
+            children={world?.name}
             {...getOverrideProps(overrides, "World Name")}
           ></Text>
         </Flex>

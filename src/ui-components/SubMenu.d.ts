@@ -5,8 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { ListItemProps } from "./ListItem";
-import { FlexProps, IconProps, TextProps } from "@aws-amplify/ui-react";
+import { FlexProps, TextProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -20,17 +19,21 @@ export declare type Variant = {
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SubMenuOverridesProps = {
     SubMenu?: PrimitiveOverrideProps<FlexProps>;
-    ListItemWrapper?: PrimitiveOverrideProps<FlexProps>;
-    "List Item38792209"?: ListItemProps;
-    "List Item38792211"?: ListItemProps;
-    "List Item38792207"?: ListItemProps;
-    "List Item38792213"?: ListItemProps;
-    Cart?: PrimitiveOverrideProps<FlexProps>;
-    Wrapper?: PrimitiveOverrideProps<FlexProps>;
-    Icons?: PrimitiveOverrideProps<FlexProps>;
-    Vector?: PrimitiveOverrideProps<IconProps>;
-    NumberWrapper?: PrimitiveOverrideProps<FlexProps>;
-    Num?: PrimitiveOverrideProps<TextProps>;
+    SubMenu39204550?: PrimitiveOverrideProps<FlexProps>;
+    ItemWrapper?: PrimitiveOverrideProps<FlexProps>;
+    "List Item39224806"?: PrimitiveOverrideProps<FlexProps>;
+    Lorem39224807?: PrimitiveOverrideProps<TextProps>;
+    "List Item39224808"?: PrimitiveOverrideProps<FlexProps>;
+    Lorem39224809?: PrimitiveOverrideProps<TextProps>;
+    "List Item39224810"?: PrimitiveOverrideProps<FlexProps>;
+    Lorem39224811?: PrimitiveOverrideProps<TextProps>;
+    "List Item39224812"?: PrimitiveOverrideProps<FlexProps>;
+    Lorem39224813?: PrimitiveOverrideProps<TextProps>;
+    "List Item39224814"?: PrimitiveOverrideProps<FlexProps>;
+    Lorem39224815?: PrimitiveOverrideProps<TextProps>;
+    SubMenu39204547?: PrimitiveOverrideProps<FlexProps>;
+    "List Item39204548"?: PrimitiveOverrideProps<FlexProps>;
+    "Cart (0)"?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type SubMenuProps = React.PropsWithChildren<Partial<FlexProps> & {
     overrides?: SubMenuOverridesProps | undefined | null;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Tabs from '../ui-components/Tabs';
+import Tabs from '../../ui-components/Tabs';
 
 const TabsContainer = ({ homeTab, onTabClick }) => {
   // Prepare override props for the Tabs component

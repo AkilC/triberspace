@@ -30,6 +30,9 @@ export declare type ShopCardTallOverridesProps = {
     "400 ($80)"?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type ShopCardTallProps = React.PropsWithChildren<Partial<FlexProps> & {
+    product?: any;
+    creator?: any;
+} & {
     overrides?: ShopCardTallOverridesProps | undefined | null;
 }>;
 export default function ShopCardTall(props: ShopCardTallProps): React.ReactElement;

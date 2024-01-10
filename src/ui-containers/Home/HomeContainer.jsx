@@ -1,9 +1,10 @@
 // HomeContainer.jsx
-import React, { useContext } from 'react';
-import ContentWrapper from './ContentWrapper';
-import EventsContent from '../ui-components/EventsContent'; // Your custom component for Spaces
-import WorldsContent from "../ui-components/WorldsContent";
+import React from 'react';
+import ContentWrapper from '../ContentWrapper';
+/* import EventsContent from '../ui-components/EventsContent'; // Your custom component for Spaces */
+import WorldsContent from "./WorldsContent";
 import TabsContainer from './TabsContainer';
+import EventsContent from './EventsContent';
 
 const HomeContainer = ({ homeTab, setHomeTab }) => {
   const handleTabClick = (tabName) => {

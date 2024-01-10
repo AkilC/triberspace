@@ -23,18 +23,7 @@ export declare type TribeOverviewOverridesProps = {
     "35"?: PrimitiveOverrideProps<TextProps>;
     "500"?: PrimitiveOverrideProps<TextProps>;
     TribeOverview?: PrimitiveOverrideProps<FlexProps>;
-    SubMenu?: PrimitiveOverrideProps<FlexProps>;
-    ItemWrapper?: PrimitiveOverrideProps<FlexProps>;
-    "List Item38864198"?: PrimitiveOverrideProps<FlexProps>;
-    Lorem38864199?: PrimitiveOverrideProps<TextProps>;
-    "List Item38864200"?: PrimitiveOverrideProps<FlexProps>;
-    Lorem38864201?: PrimitiveOverrideProps<TextProps>;
-    "List Item38864202"?: PrimitiveOverrideProps<FlexProps>;
-    Lorem38864203?: PrimitiveOverrideProps<TextProps>;
-    "List Item38864204"?: PrimitiveOverrideProps<FlexProps>;
-    Lorem38864205?: PrimitiveOverrideProps<TextProps>;
     Content?: PrimitiveOverrideProps<FlexProps>;
-    TopBar?: PrimitiveOverrideProps<FlexProps>;
     WorldDetailsWrapper?: PrimitiveOverrideProps<FlexProps>;
     WorldWrapper?: PrimitiveOverrideProps<FlexProps>;
     "Ellipse 93"?: PrimitiveOverrideProps<IconProps>;

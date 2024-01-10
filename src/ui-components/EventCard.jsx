@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "./utils";
 import { Flex, Icon, Text, View } from "@aws-amplify/ui-react";
 export default function EventCard(props) {
-  const { overrides, ...rest } = props;
+  const { event, world, overrides, ...rest } = props;
   return (
     <Flex
       gap="8px"
@@ -80,7 +80,7 @@ export default function EventCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Event Title"
+            children={event?.name}
             {...getOverrideProps(overrides, "Event Title")}
           ></Text>
         </Flex>
@@ -115,7 +115,7 @@ export default function EventCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="By creator name"
+            children={world?.name}
             {...getOverrideProps(overrides, "By creator name")}
           ></Text>
         </Flex>
