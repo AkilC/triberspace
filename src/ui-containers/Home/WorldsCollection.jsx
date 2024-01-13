@@ -1,20 +1,15 @@
-/***************************************************************************
- * The contents of this file were generated with Amplify Studio.           *
- * Please refrain from making any modifications to this file.              *
- * Any changes to this file will be overwritten when running amplify pull. *
- **************************************************************************/
-
-/* eslint-disable */
 import * as React from "react";
-import { listCreators } from "../graphql/queries";
-import StoreCard from "./StoreCard";
-import { getOverrideProps } from "./utils";
+import { listWorlds } from "../../graphql/queries";
+import WorldCard from "../../ui-components/WorldCard";
+import { getOverrideProps } from "../../ui-components/utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { generateClient } from "aws-amplify/api";
+import { Link } from 'react-router-dom';
+
 const nextToken = {};
 const apiCache = {};
 const client = generateClient();
-export default function StoreCardCollection(props) {
+export default function WorldCardCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const [pageIndex, setPageIndex] = React.useState(1);
   const [hasMorePages, setHasMorePages] = React.useState(true);
@@ -55,10 +50,10 @@ export default function StoreCardCollection(props) {
       }
       const result = (
         await client.graphql({
-          query: listCreators.replaceAll("__typename", ""),
+          query: listWorlds.replaceAll("__typename", ""),
           variables,
         })
-      ).data.listCreators;
+      ).data.listWorlds;
       newCache.push(...result.items);
       newNext = result.nextToken;
     }
@@ -87,7 +82,7 @@ export default function StoreCardCollection(props) {
         itemsPerPage={pageSize}
         isPaginated={!isApiPagination && isPaginated}
         items={itemsProp || (loading ? new Array(pageSize).fill({}) : items)}
-        {...getOverrideProps(overrides, "StoreCardCollection")}
+        {...getOverrideProps(overrides, "WorldCardCollection")}
         {...rest}
       >
         {(item, index) => {
@@ -95,12 +90,15 @@ export default function StoreCardCollection(props) {
             return <Placeholder key={index} size="large" />;
           }
           return (
-            <StoreCard
-              store={item}
-              creator={item}
-              key={item.id}
-              {...(overrideItems && overrideItems({ item, index }))}
-            ></StoreCard>
+            <Link to={`/worlds/${item.id}`} key={item.id} style={{ textDecoration: 'none' }}>
+                <WorldCard
+                    world={item}
+                    width="auto"
+                    margin="0 8px 0 0"
+                    key={item.id}
+                    {...(overrideItems && overrideItems({ item, index }))}
+                ></WorldCard>
+            </Link>
           );
         }}
       </Collection>

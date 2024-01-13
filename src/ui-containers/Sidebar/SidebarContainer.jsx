@@ -4,6 +4,8 @@ import { Flex, Text } from "@aws-amplify/ui-react";
 import TribeSideButton from "./TribeSideButton";
 import CardsPremiumButton from "../../ui-components/CardsPremiumButton";
 import SideButton from "./SideButton";
+import { NavLink } from 'react-router-dom';
+
 export default function SidebarAuthenticated(props) {
   const { overrides, ...rest } = props;
   const { activeTab, onTabChange, ...otherProps } = props;
@@ -64,46 +66,56 @@ export default function SidebarAuthenticated(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Pages")}
         >
-          <SideButton
-            label="Home"
-            iconType="homeStroke"
-            activeIconType="HomeFilled"
-            active={activeTab === 'Home'}
-            onClick={() => onTabChange('Home')}
-            width="100%"
-          />
-          <SideButton
-            label="Market"
-            iconType="MarketNoFill" // Stroke version of the icon
-            activeIconType="MarketFill" // Filled version of the icon for active state
-            active={activeTab === 'Market'}
-            onClick={() => onTabChange('Market')}
-            width="100%"
-          />
-          <SideButton
-            label="Profile"
-            iconType="PersonNoFill" // Stroke version of the icon
-            activeIconType="PersonFill" // Filled version of the icon for active state
-            active={activeTab === 'Profile'}
-            onClick={() => onTabChange('Profile')}
-            width="100%"
-          />
-          <SideButton
-            label="Avatar"
-            iconType="Avatar-NoFill" // Stroke version of the icon
-            activeIconType="AvatarFill" // Filled version of the icon for active state
-            active={activeTab === 'Avatar'}
-            onClick={() => onTabChange('Avatar')}
-            width="100%"
-          />
-          <SideButton
-            label="Calendar"
-            iconType="CalendarStroke" // Stroke version of the icon
-            activeIconType="CalendarFill" // Filled version of the icon for active state
-            active={activeTab === 'Calendar'}
-            onClick={() => onTabChange('Calendar')}
-            width="100%"
-          />
+          <NavLink to={"/"} style={{ width: '100%' }}>
+            <SideButton
+              label="Home"
+              iconType="homeStroke"
+              activeIconType="HomeFilled"
+              active={activeTab === 'Home'}
+              onClick={() => onTabChange('Home')}
+              width="100%"
+            />
+          </NavLink>
+          <NavLink to="/market" style={{ width: '100%' }}>
+            <SideButton
+              label="Market"
+              iconType="MarketNoFill" // Stroke version of the icon
+              activeIconType="MarketFill" // Filled version of the icon for active state
+              active={activeTab === 'Market'}
+              onClick={() => onTabChange('Market')}
+              width="100%"
+            />
+          </NavLink>
+          <NavLink to="/profile" style={{ width: '100%' }}>
+            <SideButton
+              label="Profile"
+              iconType="PersonNoFill" // Stroke version of the icon
+              activeIconType="PersonFill" // Filled version of the icon for active state
+              active={activeTab === 'Profile'}
+              onClick={() => onTabChange('Profile')}
+              width="100%"
+            />
+          </NavLink>
+          <NavLink to="/avatar" style={{ width: '100%' }}>
+            <SideButton
+              label="Avatar"
+              iconType="Avatar-NoFill" // Stroke version of the icon
+              activeIconType="AvatarFill" // Filled version of the icon for active state
+              active={activeTab === 'Avatar'}
+              onClick={() => onTabChange('Avatar')}
+              width="100%"
+            />
+          </NavLink>
+          <NavLink to="/calendar" style={{ width: '100%' }}>
+            <SideButton
+              label="Calendar"
+              iconType="CalendarStroke" // Stroke version of the icon
+              activeIconType="CalendarFill" // Filled version of the icon for active state
+              active={activeTab === 'Calendar'}
+              onClick={() => onTabChange('Calendar')}
+              width="100%"
+            />
+          </NavLink>
         </Flex>
         <Flex
           gap="24px"
@@ -173,6 +185,7 @@ export default function SidebarAuthenticated(props) {
             {...getOverrideProps(overrides, "Categories")}
             >
             {tribes.map((tribe) => (
+              <NavLink to={`/tribe/${tribe.id}`} key={tribe.id} style={{ width: '100%' }}>
                 <TribeSideButton
                 key={tribe.id}
                 label={tribe.name}
@@ -180,6 +193,7 @@ export default function SidebarAuthenticated(props) {
                 width="100%"
                 onClick={() => onTabChange(tribe.id)}
                 />
+              </NavLink>
             ))}
             </Flex>
             </Flex>

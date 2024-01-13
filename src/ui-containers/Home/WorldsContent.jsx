@@ -1,7 +1,7 @@
 import * as React from "react";
 import { getOverrideProps } from "../../ui-components/utils";
 import { Flex, Text } from "@aws-amplify/ui-react";
-import WorldCardCollection from "../../ui-components/WorldCardCollection";
+import WorldCardCollection from "./WorldsCollection";
 export default function WorldsContent(props) {
   const { overrides, ...rest } = props;
   return (

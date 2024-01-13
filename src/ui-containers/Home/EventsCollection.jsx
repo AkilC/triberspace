@@ -4,6 +4,8 @@ import EventCard from "../../ui-components/EventCard";
 import { getOverrideProps } from "../../ui-components/utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
 import { generateClient } from "aws-amplify/api";
+import { Link } from 'react-router-dom';
+
 const nextToken = {};
 const apiCache = {};
 const client = generateClient();
@@ -90,16 +92,19 @@ export default function EventCollection(props) {
           if (loading) {
             return <Placeholder key={index} size="large" />;
           }
+          console.log(item.id);
           return (
-            <EventCard
-              height="auto"
-              width="auto"
-              margin="0 24px 16px 0px"
-              world={item.World}
-              event={item}
-              key={item.id}
-              {...(overrideItems && overrideItems({ item, index }))}
-            ></EventCard>
+            <Link to={`events/${item.id}`} key={item.id} style={{ textDecoration: 'none' }}>
+              <EventCard
+                height="auto"
+                width="auto"
+                margin="0 24px 16px 0px"
+                world={item.World}
+                event={item}
+                key={item.id}
+                {...(overrideItems && overrideItems({ item, index }))}
+              ></EventCard>
+            </Link>
           );
         }}
       </Collection>
