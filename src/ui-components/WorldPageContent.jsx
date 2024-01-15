@@ -12,7 +12,7 @@ import SmallButton from "./SmallButton";
 import LargeButton from "./LargeButton";
 import SpaceCardSmall from "./SpaceCardSmall";
 export default function WorldPageContent(props) {
-  const { overrides, ...rest } = props;
+  const { world, overrides, ...rest } = props;
   return (
     <Flex
       gap="24px"
@@ -176,7 +176,7 @@ export default function WorldPageContent(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="World Name"
+              children={world?.name}
               {...getOverrideProps(overrides, "World Name")}
             ></Text>
             <Text

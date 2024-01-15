@@ -21,38 +21,6 @@ export default function Dashboard(props) {
   const [tribeTab, setTribeTab] = useState(sessionStorage.getItem('tribeTab') || 'Overview');
   const [activeTab, setActiveTab] = useState(sessionStorage.getItem('activeTab') || 'Home');
 
-  /* useEffect(() => {
-    // Update local storage when state changes
-    sessionStorage.setItem('homeTab', homeTab);
-    sessionStorage.setItem('marketTab', marketTab);
-    sessionStorage.setItem('tribeTab', tribeTab);
-    sessionStorage.setItem('activeTab', activeTab);
-  }, [homeTab, marketTab, tribeTab, activeTab]);
-
-  let mainContent;
-  switch (activeTab) {
-    case 'Home':
-      mainContent = <HomeContainer homeTab={homeTab} setHomeTab={setHomeTab}/>;
-      break;
-    case 'Market':
-      mainContent = <MarketContainer marketTab={marketTab} setMarketTab={setMarketTab}/>;
-      break;
-    case 'Profile':
-      mainContent = <ProfileContainer/>;
-      break;
-    case 'Avatar':
-      mainContent = <AvatarContainer />;
-      break;
-    case 'Calendar':
-      mainContent = <CalendarContainer />;
-      break;
-    case 'tribe1':
-      mainContent = <TribeContainer tribeTab={tribeTab} setTribeTab={setTribeTab} />;
-      break;
-    default:
-      mainContent = <HomeContainer />;
-  } */
-
   return (
       <Flex
         gap="0"
@@ -108,7 +76,6 @@ export default function Dashboard(props) {
               <Route path="/calendar" element={<CalendarContainer />} />
               <Route path="/tribe/:tribeId/*" element={<TribeContainer />} />
           </Routes>
-          {/* {mainContent} */}
         </Flex>
       </Flex>
   );

@@ -1,78 +1,33 @@
-import * as React from "react";
-import { listEvents } from "../../graphql/queries";
+import React, { useContext } from 'react';
+import { GlobalContext } from "../../contexts/GlobalStore";
 import EventCard from "../../ui-components/EventCard";
 import { getOverrideProps } from "../../ui-components/utils";
 import { Collection, Pagination, Placeholder } from "@aws-amplify/ui-react";
-import { generateClient } from "aws-amplify/api";
 import { Link } from 'react-router-dom';
 
-const nextToken = {};
-const apiCache = {};
-const client = generateClient();
 export default function EventCollection(props) {
-  const { items: itemsProp, overrideItems, overrides, ...rest } = props;
-  const [pageIndex, setPageIndex] = React.useState(1);
-  const [hasMorePages, setHasMorePages] = React.useState(true);
-  const [items, setItems] = React.useState([]);
-  const [isApiPagination, setIsApiPagination] = React.useState(false);
-  const [instanceKey, setInstanceKey] = React.useState("newGuid");
-  const [loading, setLoading] = React.useState(true);
-  const [maxViewed, setMaxViewed] = React.useState(1);
-  const pageSize = 6;
-  const isPaginated = false;
-  React.useEffect(() => {
-    nextToken[instanceKey] = "";
-    apiCache[instanceKey] = [];
-  }, [instanceKey]);
-  React.useEffect(() => {
-    setIsApiPagination(!!!itemsProp);
-  }, [itemsProp]);
+  const { overrideItems, overrides, ...rest } = props;
+  const { eventsData, loading, hasMorePages, pageIndex, setPageIndex } = useContext(GlobalContext);
+  const pageSize = 6; // Adjust if needed
+  const isApiPagination = false; // Update based on your logic
+
+  // Debugging
+  console.log("Events Data:", eventsData);
+
   const handlePreviousPage = () => {
-    setPageIndex(pageIndex - 1);
+    if (pageIndex > 1) {
+      setPageIndex(pageIndex - 1);
+    }
   };
+
   const handleNextPage = () => {
     setPageIndex(pageIndex + 1);
   };
+
   const jumpToPage = (pageNum) => {
     setPageIndex(pageNum);
   };
-  const loadPage = async (page) => {
-    const cacheUntil = page * pageSize + 1;
-    const newCache = apiCache[instanceKey].slice();
-    let newNext = nextToken[instanceKey];
-    while ((newCache.length < cacheUntil || !isPaginated) && newNext != null) {
-      setLoading(true);
-      const variables = {
-        limit: pageSize,
-        filter: {  },
-      };
-      if (newNext) {
-        variables["nextToken"] = newNext;
-      }
-      const result = (
-        await client.graphql({
-          query: listEvents.replaceAll("__typename", ""),
-          variables,
-        })
-      ).data.listEvents;
-      newCache.push(...result.items);
-      newNext = result.nextToken;
-    }
-    const cacheSlice = isPaginated
-      ? newCache.slice((page - 1) * pageSize, page * pageSize)
-      : newCache;
-    setItems(cacheSlice);
-    setHasMorePages(!!newNext);
-    setLoading(false);
-    apiCache[instanceKey] = newCache;
-    nextToken[instanceKey] = newNext;
-  };
-  React.useEffect(() => {
-    loadPage(pageIndex);
-  }, [pageIndex]);
-  React.useEffect(() => {
-    setMaxViewed(Math.max(maxViewed, pageIndex));
-  }, [pageIndex, maxViewed, setMaxViewed]);
+
   return (
     <div>
       <Collection
@@ -83,16 +38,15 @@ export default function EventCollection(props) {
         alignItems="stretch"
         justifyContent="stretch"
         itemsPerPage={pageSize}
-        isPaginated={!isApiPagination && isPaginated}
-        items={itemsProp || (loading ? new Array(pageSize).fill({}) : items)}
+        isPaginated={!isApiPagination && isApiPagination}
+        items={loading ? new Array(pageSize).fill({}) : eventsData}
         {...getOverrideProps(overrides, "EventCollection")}
         {...rest}
       >
         {(item, index) => {
-          if (loading) {
+          if (loading || !item) {
             return <Placeholder key={index} size="large" />;
           }
-          console.log(item.id);
           return (
             <Link to={`events/${item.id}`} key={item.id} style={{ textDecoration: 'none' }}>
               <EventCard
@@ -101,17 +55,17 @@ export default function EventCollection(props) {
                 margin="0 24px 16px 0px"
                 world={item.World}
                 event={item}
-                key={item.id}
                 {...(overrideItems && overrideItems({ item, index }))}
               ></EventCard>
             </Link>
           );
         }}
       </Collection>
-      {isApiPagination && isPaginated && (
+
+      {isApiPagination && hasMorePages && (
         <Pagination
           currentPage={pageIndex}
-          totalPages={maxViewed}
+          totalPages={Math.ceil(eventsData.length / pageSize)}
           hasMorePages={hasMorePages}
           onNext={handleNextPage}
           onPrevious={handlePreviousPage}

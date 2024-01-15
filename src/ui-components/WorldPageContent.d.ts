@@ -52,6 +52,8 @@ export declare type WorldPageContentOverridesProps = {
     "Vector 3"?: PrimitiveOverrideProps<IconProps>;
 } & EscapeHatchProps;
 export declare type WorldPageContentProps = React.PropsWithChildren<Partial<FlexProps> & {
+    world?: any;
+} & {
     overrides?: WorldPageContentOverridesProps | undefined | null;
 }>;
 export default function WorldPageContent(props: WorldPageContentProps): React.ReactElement;

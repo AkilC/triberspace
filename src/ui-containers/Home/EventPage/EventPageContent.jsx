@@ -1,11 +1,43 @@
-import * as React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { getOverrideProps } from "../../../ui-components/utils";
 import { Flex, Icon, Text, View } from "@aws-amplify/ui-react";
+import { useParams } from "react-router-dom";
+import { getEvent as getEventQuery } from "../../../graphql/queries";
 import SmallButton from "../../../ui-components/SmallButton";
 import LargeButton from "../../../ui-components/LargeButton";
 import EventCard from "../../../ui-components/EventCard";
+import { Link } from "react-router-dom";
+import { generateClient } from 'aws-amplify/api';
+
 export default function EventPageContent(props) {
-  const { overrides, ...rest } = props;
+    const { overrides, ...rest } = props;
+    const { eventId } = useParams();
+    const [event, setEvent] = useState(null);
+
+    const client = generateClient();
+
+    useEffect(() => {
+        const fetchEvent = async () => {
+            try {
+                const variables = { id: eventId };
+                const result = await client.graphql({
+                    query: getEventQuery,
+                    variables,
+                });
+                setEvent(result.data.getEvent);
+            } catch (error) {
+                console.error('Error fetching event:', error);
+            }
+        };
+
+        fetchEvent();
+    }, [eventId]);
+  
+    console.log(event);
+    const eventName = event ? event.name : "Loading...";
+    const worldName = event ? event.World.Creator.name : "Loading...";
+    const eventDescription = event ? event.description : "Loading...";
+  
   return (
     <Flex
       gap="32px"
@@ -43,6 +75,7 @@ export default function EventPageContent(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Back")}
         >
+        <Link to={`/`} style={{ textDecoration: 'none' }}>
           <View
             width="28px"
             height="28px"
@@ -57,27 +90,28 @@ export default function EventPageContent(props) {
             {...getOverrideProps(overrides, "Chevron")}
           >
             <Icon
-              width="9px"
-              height="19px"
-              viewBox={{ minX: 0, minY: 0, width: 9, height: 19 }}
-              paths={[
-                {
-                  d: "M10.8149 1.71936L12.5342 -0.0955201L8.90448 -3.53424L7.18512 -1.71936L10.8149 1.71936ZM7.18512 20.7194L8.90448 22.5342L12.5342 19.0955L10.8149 17.2806L7.18512 20.7194ZM7.18512 -1.71936L-1.16333 7.09289L2.46643 10.5316L10.8149 1.71936L7.18512 -1.71936ZM-1.16333 11.9071L7.18512 20.7194L10.8149 17.2806L2.46643 8.46838L-1.16333 11.9071ZM-1.16333 7.09289C-2.44222 8.44283 -2.44222 10.5572 -1.16333 11.9071L2.46643 8.46838C3.01453 9.04693 3.01452 9.95307 2.46643 10.5316L-1.16333 7.09289Z",
-                  stroke: "rgba(255,255,255,1)",
-                  fillRule: "nonzero",
-                  strokeWidth: 5,
-                },
-              ]}
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              position="absolute"
-              top="calc(50% - 9.5px - 0.5px)"
-              left="calc(50% - 4.5px - 0.5px)"
-              {...getOverrideProps(overrides, "Vector 13")}
-            ></Icon>
-          </View>
+                width="18px"
+                height="38px"
+                viewBox={{ minX: 0, minY: 0, width: 9, height: 19 }}
+                paths={[
+                  {
+                    d: "M8,1 L4.5,4.5 L8,8", 
+                    stroke: "rgba(255,255,255,1)",
+                    fill: "none", // Ensure there is no fill
+                    strokeWidth: 2, // Adjust for desired stroke thickness
+                  },
+                ]}
+                display="block"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                position="absolute"
+                top="calc(50% - 9.5px - 0.5px)"
+                left="calc(50% - 4.5px - 0.5px)"
+                {...getOverrideProps(overrides, "Vector 13")}
+              ></Icon>
+            </View>
+          </Link>
         </Flex>
         <SmallButton
           display="flex"
@@ -164,7 +198,7 @@ export default function EventPageContent(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Event Name"
+              children={eventName}
               {...getOverrideProps(overrides, "Event Name")}
             ></Text>
             <Text
@@ -530,7 +564,7 @@ export default function EventPageContent(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="World Name"
+                children={worldName}
                 {...getOverrideProps(overrides, "World Name")}
               ></Text>
               <Text

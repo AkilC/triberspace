@@ -809,8 +809,8 @@ export default function ProfileContent(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Inventory"
-              {...getOverrideProps(overrides, "Inventory")}
+              children="Showcase"
+              {...getOverrideProps(overrides, "Showcase")}
             ></Text>
             <Text
               fontFamily="Inter"

@@ -63,7 +63,7 @@ export declare type ProfileContentOverridesProps = {
     Thumbnail?: PrimitiveOverrideProps<FlexProps>;
     InventorySection?: PrimitiveOverrideProps<FlexProps>;
     InventoryHeader?: PrimitiveOverrideProps<FlexProps>;
-    Inventory?: PrimitiveOverrideProps<TextProps>;
+    Showcase?: PrimitiveOverrideProps<TextProps>;
     Edit?: PrimitiveOverrideProps<TextProps>;
     InventoryItemsWrapper?: PrimitiveOverrideProps<FlexProps>;
     "Frame 65"?: PrimitiveOverrideProps<FlexProps>;

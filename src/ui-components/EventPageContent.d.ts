@@ -76,6 +76,9 @@ export declare type EventPageContentOverridesProps = {
     EventCard39355261?: EventCardProps;
 } & EscapeHatchProps;
 export declare type EventPageContentProps = React.PropsWithChildren<Partial<FlexProps> & {
+    event?: any;
+    world?: any;
+} & {
     overrides?: EventPageContentOverridesProps | undefined | null;
 }>;
 export default function EventPageContent(props: EventPageContentProps): React.ReactElement;

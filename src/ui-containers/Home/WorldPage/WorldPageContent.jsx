@@ -1,11 +1,40 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { getOverrideProps } from "../../../ui-components/utils";
 import { Flex, Icon, Text, View } from "@aws-amplify/ui-react";
+import { useParams } from "react-router-dom";
+import { getWorld as getWorldQuery } from "../../../graphql/queries";
 import SmallButton from "../../../ui-components/SmallButton";
 import LargeButton from "../../../ui-components/LargeButton";
 import SpaceCardSmall from "../../../ui-components/SpaceCardSmall";
+import { Link } from "react-router-dom";
+import { generateClient } from "aws-amplify/api";
+
 export default function WorldPageContent(props) {
-  const { overrides, ...rest } = props;
+    const { overrides, ...rest } = props;
+    const { worldId } = useParams();
+    const [world, setWorld] = useState(null);
+
+    const client = generateClient();
+
+    useEffect(() => {
+        const fetchWorld = async () => {
+            try {
+                const variables = { id: worldId };
+                const result = await client.graphql({
+                    query: getWorldQuery,
+                    variables,
+                });
+                setWorld(result.data.getWorld);
+            } catch (error) {
+                console.error('Error fetching world:', error);
+            }
+        };
+
+        fetchWorld();
+    }, [worldId]);
+  
+    console.log(world);
+    const worldName = world ? world.name : "Loading...";
   return (
     <Flex
       gap="24px"
@@ -22,7 +51,7 @@ export default function WorldPageContent(props) {
       <Flex
         gap="-40px"
         direction="column"
-        width="unset"
+        width="100%"
         height="unset"
         justifyContent="flex-start"
         alignItems="center"
@@ -34,7 +63,7 @@ export default function WorldPageContent(props) {
         <Flex
           gap="1024px"
           direction="row"
-          width="1200px"
+          width="100%"
           height="unset"
           justifyContent="space-between"
           alignItems="center"
@@ -55,6 +84,7 @@ export default function WorldPageContent(props) {
             padding="0px 0px 0px 0px"
             {...getOverrideProps(overrides, "Icons")}
           >
+          <Link to={`/worlds`} style={{ textDecoration: 'none' }}>
             <View
               width="28px"
               height="28px"
@@ -69,15 +99,15 @@ export default function WorldPageContent(props) {
               {...getOverrideProps(overrides, "Chevron")}
             >
               <Icon
-                width="9px"
-                height="19px"
+                width="18px"
+                height="38px"
                 viewBox={{ minX: 0, minY: 0, width: 9, height: 19 }}
                 paths={[
                   {
-                    d: "M10.8149 1.71936L12.5342 -0.0955201L8.90448 -3.53424L7.18512 -1.71936L10.8149 1.71936ZM7.18512 20.7194L8.90448 22.5342L12.5342 19.0955L10.8149 17.2806L7.18512 20.7194ZM7.18512 -1.71936L-1.16333 7.09289L2.46643 10.5316L10.8149 1.71936L7.18512 -1.71936ZM-1.16333 11.9071L7.18512 20.7194L10.8149 17.2806L2.46643 8.46838L-1.16333 11.9071ZM-1.16333 7.09289C-2.44222 8.44283 -2.44222 10.5572 -1.16333 11.9071L2.46643 8.46838C3.01453 9.04693 3.01452 9.95307 2.46643 10.5316L-1.16333 7.09289Z",
+                    d: "M8,1 L4.5,4.5 L8,8", 
                     stroke: "rgba(255,255,255,1)",
-                    fillRule: "nonzero",
-                    strokeWidth: 5,
+                    fill: "none", // Ensure there is no fill
+                    strokeWidth: 2, // Adjust for desired stroke thickness
                   },
                 ]}
                 display="block"
@@ -90,6 +120,7 @@ export default function WorldPageContent(props) {
                 {...getOverrideProps(overrides, "Vector 13")}
               ></Icon>
             </View>
+            </Link>
           </Flex>
           <SmallButton
             display="flex"
@@ -169,7 +200,7 @@ export default function WorldPageContent(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="World Name"
+              children={worldName}
               {...getOverrideProps(overrides, "World Name")}
             ></Text>
             <Text
@@ -323,8 +354,8 @@ export default function WorldPageContent(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Total Events"
-                  {...getOverrideProps(overrides, "Total Events")}
+                  children="Total worlds"
+                  {...getOverrideProps(overrides, "Total worlds")}
                 ></Text>
               </Flex>
             </Flex>
@@ -466,8 +497,8 @@ export default function WorldPageContent(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Event Archive"
-          {...getOverrideProps(overrides, "Event Archive")}
+          children="world Archive"
+          {...getOverrideProps(overrides, "world Archive")}
         ></Text>
         <Icon
           width="18px"

@@ -12,7 +12,7 @@ import SmallButton from "./SmallButton";
 import LargeButton from "./LargeButton";
 import EventCard from "./EventCard";
 export default function EventPageContent(props) {
-  const { overrides, ...rest } = props;
+  const { event, world, overrides, ...rest } = props;
   return (
     <Flex
       gap="32px"
@@ -171,7 +171,7 @@ export default function EventPageContent(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Event Name"
+              children={event?.name}
               {...getOverrideProps(overrides, "Event Name")}
             ></Text>
             <Text
@@ -537,7 +537,7 @@ export default function EventPageContent(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="World Name"
+                children={world?.name}
                 {...getOverrideProps(overrides, "World Name")}
               ></Text>
               <Text

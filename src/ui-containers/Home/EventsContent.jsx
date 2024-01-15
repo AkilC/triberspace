@@ -67,7 +67,7 @@ export default function EventsContent(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Listening Parties"
+            children="Art Exhibits"
             {...getOverrideProps(overrides, "Header38723184")}
           ></Text>
         </Flex>
@@ -201,7 +201,7 @@ export default function EventsContent(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Art Exhibits"
+            children="Listening Parties"
             {...getOverrideProps(overrides, "Header38723200")}
           ></Text>
         </Flex>
