@@ -6,7 +6,7 @@
 
 import * as React from "react";
 import { FlexProps, IconProps, TextProps } from "@aws-amplify/ui-react";
-import { LogInProps } from "./LogIn";
+import { MenuItemsProps } from "./MenuItems";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -18,8 +18,8 @@ export declare type Variant = {
     overrides: EscapeHatchProps;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type NavbarUnauthenticatedOverridesProps = {
-    NavbarUnauthenticated?: PrimitiveOverrideProps<FlexProps>;
+export declare type NavbarOverridesProps = {
+    Navbar?: PrimitiveOverrideProps<FlexProps>;
     Content?: PrimitiveOverrideProps<FlexProps>;
     Logo?: PrimitiveOverrideProps<FlexProps>;
     Icon?: PrimitiveOverrideProps<FlexProps>;
@@ -32,9 +32,9 @@ export declare type NavbarUnauthenticatedOverridesProps = {
     "Search Bar"?: PrimitiveOverrideProps<FlexProps>;
     "\uD83E\uDD86 icon \"magnifying glass\""?: PrimitiveOverrideProps<FlexProps>;
     Vector?: PrimitiveOverrideProps<IconProps>;
-    "Log In"?: LogInProps;
+    "Menu Items"?: MenuItemsProps;
 } & EscapeHatchProps;
-export declare type NavbarUnauthenticatedProps = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: NavbarUnauthenticatedOverridesProps | undefined | null;
+export declare type NavbarProps = React.PropsWithChildren<Partial<FlexProps> & {
+    overrides?: NavbarOverridesProps | undefined | null;
 }>;
-export default function NavbarUnauthenticated(props: NavbarUnauthenticatedProps): React.ReactElement;
+export default function Navbar(props: NavbarProps): React.ReactElement;

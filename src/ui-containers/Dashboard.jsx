@@ -11,6 +11,7 @@ import AvatarContainer from "./Avatar/AvatarContainer";
 import CalendarContainer from "./Calendar/CalendarContainer";
 import TribeContainer from "./Tribes/TribeContainer";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from "./Navbar/Navbar";
 
 export default function Dashboard(props) {
   const { overrides, ...rest } = props;
@@ -35,23 +36,7 @@ export default function Dashboard(props) {
         {...getOverrideProps(overrides, "Dashboard")}
         {...rest}
       >
-        <NavbarAuthenticated
-          display="flex"
-          gap="10px"
-          direction="column"
-          width="unset"
-          height="64px"
-          justifyContent="center"
-          alignItems="center"
-          overflow="hidden"
-          shrink="0"
-          alignSelf="stretch"
-          position="relative"
-          border="1px SOLID rgba(59,58,58,1)"
-          padding="17px 35px 17px 35px"
-          backgroundColor="rgba(31,31,31,1)"
-          {...getOverrideProps(overrides, "Navbar-Authenticated")}
-        ></NavbarAuthenticated>
+        <Navbar width="100%"/>
         <Flex
           gap="0"
           direction="row"

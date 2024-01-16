@@ -1,15 +1,9 @@
-/***************************************************************************
- * The contents of this file were generated with Amplify Studio.           *
- * Please refrain from making any modifications to this file.              *
- * Any changes to this file will be overwritten when running amplify pull. *
- **************************************************************************/
-
-/* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "./utils";
+import { getOverrideProps } from "../../ui-components/utils";
 import { Flex, Icon, Text } from "@aws-amplify/ui-react";
-import LogIn from "./LogIn";
-export default function NavbarUnauthenticated(props) {
+import MenuItems from "../../ui-components/MenuItems";
+import LogIn from "../../ui-components/LogIn"
+export default function Navbar(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
@@ -22,19 +16,20 @@ export default function NavbarUnauthenticated(props) {
       overflow="hidden"
       position="relative"
       border="1px SOLID rgba(59,58,58,1)"
-      padding="21px 39px 21px 39px"
+      padding="17px 35px 17px 35px"
       backgroundColor="rgba(31,31,31,1)"
-      {...getOverrideProps(overrides, "NavbarUnauthenticated")}
+      {...getOverrideProps(overrides, "Navbar")}
       {...rest}
     >
       <Flex
-        gap="271px"
+        gap="unset"
         direction="row"
-        width="1518.62px"
+        width="unset"
         height="unset"
         justifyContent="space-between"
         alignItems="center"
         shrink="0"
+        alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Content")}
@@ -45,7 +40,7 @@ export default function NavbarUnauthenticated(props) {
           width="300px"
           height="unset"
           justifyContent="flex-start"
-          alignItems="flex-start"
+          alignItems="center"
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
@@ -226,6 +221,7 @@ export default function NavbarUnauthenticated(props) {
           borderRadius="64px"
           padding="12px 26px 12px 26px"
           backgroundColor="rgba(217,217,217,1)"
+          maxWidth="700px"
           {...getOverrideProps(overrides, "Search Bar")}
         >
           <Flex
@@ -250,11 +246,11 @@ export default function NavbarUnauthenticated(props) {
                 minX: 0,
                 minY: 0,
                 width: 16,
-                height: 16.000001907348633,
+                height: 16.000003814697266,
               }}
               paths={[
                 {
-                  d: "M6.9372 0.0198206C3.11183 0.0198206 0 3.13165 0 6.95702C0 10.7824 3.11183 13.8942 6.9372 13.8942C8.10661 13.8942 9.2562 13.6167 10.2274 13.0816C10.3052 13.1752 10.3915 13.2614 10.4851 13.3392L12.4671 15.3213C12.6501 15.5272 12.8733 15.6936 13.123 15.8101C13.3726 15.9267 13.6434 15.991 13.9188 15.9991C14.1942 16.0072 14.4683 15.959 14.7244 15.8573C14.9805 15.7556 15.213 15.6027 15.4079 15.4079C15.6027 15.213 15.7556 14.9805 15.8573 14.7244C15.959 14.4683 16.0072 14.1942 15.9991 13.9188C15.991 13.6434 15.9267 13.3726 15.8101 13.123C15.6936 12.8733 15.5272 12.6502 15.3213 12.4671L13.3392 10.4851C13.2427 10.3885 13.1364 10.3021 13.0221 10.2274C13.5573 9.2562 13.8942 8.12643 13.8942 6.9372C13.8942 3.11183 10.7824 0 6.95702 0L6.9372 0.0198206ZM6.9372 2.00188C9.69225 2.00188 11.8923 4.20196 11.8923 6.95702C11.8923 8.26517 11.4166 9.47423 10.5842 10.3662C10.5644 10.386 10.5445 10.4058 10.5247 10.4256C10.4311 10.5034 10.3448 10.5897 10.267 10.6833C9.39495 11.4761 8.20571 11.932 6.91738 11.932C4.16232 11.932 1.96224 9.7319 1.96224 6.97684C1.96224 4.22178 4.16232 2.0217 6.91738 2.0217L6.9372 2.00188Z",
+                  d: "M6.9372 0.0198206C3.11183 0.0198206 0 3.13165 0 6.95702C0 10.7824 3.11183 13.8942 6.9372 13.8942C8.10661 13.8942 9.2562 13.6167 10.2274 13.0816C10.3052 13.1752 10.3915 13.2614 10.4851 13.3392L12.4671 15.3213C12.6501 15.5272 12.8733 15.6936 13.123 15.8102C13.3726 15.9267 13.6434 15.991 13.9188 15.9991C14.1942 16.0072 14.4683 15.959 14.7244 15.8573C14.9805 15.7556 15.213 15.6027 15.4079 15.4079C15.6027 15.213 15.7556 14.9805 15.8573 14.7244C15.959 14.4683 16.0072 14.1942 15.9991 13.9188C15.991 13.6434 15.9267 13.3726 15.8101 13.123C15.6936 12.8733 15.5272 12.6502 15.3213 12.4671L13.3392 10.4851C13.2427 10.3885 13.1364 10.3021 13.0221 10.2274C13.5573 9.2562 13.8942 8.12643 13.8942 6.9372C13.8942 3.11183 10.7824 0 6.95702 0L6.9372 0.0198206ZM6.9372 2.00188C9.69225 2.00188 11.8923 4.20196 11.8923 6.95702C11.8923 8.26517 11.4166 9.47423 10.5842 10.3662C10.5644 10.386 10.5445 10.4058 10.5247 10.4256C10.4311 10.5034 10.3448 10.5897 10.267 10.6833C9.39495 11.4761 8.20571 11.932 6.91738 11.932C4.16232 11.932 1.96224 9.7319 1.96224 6.97684C1.96224 4.22178 4.16232 2.0217 6.91738 2.0217L6.9372 2.00188Z",
                   fill: "rgba(74,74,74,1)",
                   fillRule: "nonzero",
                 },
@@ -272,19 +268,20 @@ export default function NavbarUnauthenticated(props) {
             ></Icon>
           </Flex>
         </Flex>
-        <LogIn
+       {/*  <MenuItems
           display="flex"
-          gap="22px"
+          gap="16px"
           direction="row"
           width="300px"
           height="unset"
           justifyContent="flex-end"
-          alignItems="flex-start"
+          alignItems="center"
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Log In")}
-        ></LogIn>
+          {...getOverrideProps(overrides, "Menu Items")}
+        ></MenuItems> */}
+        <LogIn/>
       </Flex>
     </Flex>
   );
