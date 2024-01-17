@@ -9,7 +9,7 @@ import ProfileContainer from "./Profile/ProfileContainer";
 import AvatarContainer from "./Avatar/AvatarContainer";
 import CalendarContainer from "./Calendar/CalendarContainer";
 import TribeContainer from "./Tribes/TribeContainer";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 
 export default function Dashboard(props) {

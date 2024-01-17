@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getOverrideProps } from "../../ui-components/utils";
 import { Flex, Icon, Text } from "@aws-amplify/ui-react";
 import MenuItems from "../../ui-components/MenuItems";
-import LogIn from "../../ui-components/LogIn";
+import LogIn from "../Login/Login";
 import { getCurrentUser, fetchAuthSession, signOut } from "aws-amplify/auth";
 
 export default function Navbar(props) {
@@ -34,18 +34,18 @@ export default function Navbar(props) {
     }
   }
 
-  // async function handleSignOut() {
-  //   try {
-  //     await signOut();
-  //   } catch (error) {
-  //     console.log("error signing out: ", error);
-  //   }
-  // }
+  async function handleSignOut() {
+    try {
+      await signOut();
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  }
 
   const authen = useEffect(() => {
     currentAuthenticatedUser();
     currentSession();
-    // handleSignOut();
+    handleSignOut();
   });
 
   return (
