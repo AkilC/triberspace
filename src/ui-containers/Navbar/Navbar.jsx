@@ -1,10 +1,53 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { getOverrideProps } from "../../ui-components/utils";
 import { Flex, Icon, Text } from "@aws-amplify/ui-react";
 import MenuItems from "../../ui-components/MenuItems";
-import LogIn from "../../ui-components/LogIn"
+import LogIn from "../../ui-components/LogIn";
+import { getCurrentUser, fetchAuthSession, signOut } from "aws-amplify/auth";
+
 export default function Navbar(props) {
   const { overrides, ...rest } = props;
+  const [isAuth, setAuth] = useState(false);
+
+  async function currentAuthenticatedUser() {
+    try {
+      const { username, userId, signInDetails } = await getCurrentUser();
+      console.log(`The username: ${username}`);
+      console.log(`The userId: ${userId}`);
+      console.log(`The signInDetails: ${signInDetails}`);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function currentSession() {
+    try {
+      const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+      console.log(`Access Token: ${accessToken}`);
+      console.log(`idToken: ${idToken}`);
+
+      if (accessToken) {
+        setAuth(true);
+      }
+    } catch (err) {
+      console.log("Error" + err);
+    }
+  }
+
+  // async function handleSignOut() {
+  //   try {
+  //     await signOut();
+  //   } catch (error) {
+  //     console.log("error signing out: ", error);
+  //   }
+  // }
+
+  const authen = useEffect(() => {
+    currentAuthenticatedUser();
+    currentSession();
+    // handleSignOut();
+  });
+
   return (
     <Flex
       gap="10px"
@@ -268,20 +311,8 @@ export default function Navbar(props) {
             ></Icon>
           </Flex>
         </Flex>
-       {/*  <MenuItems
-          display="flex"
-          gap="16px"
-          direction="row"
-          width="300px"
-          height="unset"
-          justifyContent="flex-end"
-          alignItems="center"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Menu Items")}
-        ></MenuItems> */}
-        <LogIn/>
+        {isAuth && <MenuItems />}
+        {!isAuth && <LogIn />}
       </Flex>
     </Flex>
   );
