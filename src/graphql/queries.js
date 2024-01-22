@@ -1,6 +1,185 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getAvatar = /* GraphQL */ `
+  query GetAvatar($id: ID!) {
+    getAvatar(id: $id) {
+      id
+      color
+      Profile {
+        id
+        username
+        name
+        instagram
+        twitter
+        Avatar {
+          id
+          color
+          Profile {
+            id
+            username
+            name
+            instagram
+            twitter
+            createdAt
+            updatedAt
+            profileAvatarId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          avatarProfileId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        profileAvatarId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      avatarProfileId
+      owner
+      __typename
+    }
+  }
+`;
+export const listAvatars = /* GraphQL */ `
+  query ListAvatars(
+    $filter: ModelAvatarFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAvatars(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        color
+        Profile {
+          id
+          username
+          name
+          instagram
+          twitter
+          Avatar {
+            id
+            color
+            createdAt
+            updatedAt
+            avatarProfileId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          profileAvatarId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        avatarProfileId
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getProfile = /* GraphQL */ `
+  query GetProfile($id: ID!) {
+    getProfile(id: $id) {
+      id
+      username
+      name
+      instagram
+      twitter
+      Avatar {
+        id
+        color
+        Profile {
+          id
+          username
+          name
+          instagram
+          twitter
+          Avatar {
+            id
+            color
+            createdAt
+            updatedAt
+            avatarProfileId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          profileAvatarId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        avatarProfileId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      profileAvatarId
+      owner
+      __typename
+    }
+  }
+`;
+export const listProfiles = /* GraphQL */ `
+  query ListProfiles(
+    $filter: ModelProfileFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        name
+        instagram
+        twitter
+        Avatar {
+          id
+          color
+          Profile {
+            id
+            username
+            name
+            instagram
+            twitter
+            createdAt
+            updatedAt
+            profileAvatarId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          avatarProfileId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        profileAvatarId
+        owner
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getCreator = /* GraphQL */ `
   query GetCreator($id: ID!) {
     getCreator(id: $id) {

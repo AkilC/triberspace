@@ -21,31 +21,37 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type WorldCreateFormInputValues = {
+export declare type EventCreateFormInputValues = {
     name?: string;
-    Spaces?: any[];
-    Creator?: any;
+    type?: string;
+    Comments?: any[];
+    World?: any;
+    Space?: any;
 };
-export declare type WorldCreateFormValidationValues = {
+export declare type EventCreateFormValidationValues = {
     name?: ValidationFunction<string>;
-    Spaces?: ValidationFunction<any>;
-    Creator?: ValidationFunction<any>;
+    type?: ValidationFunction<string>;
+    Comments?: ValidationFunction<any>;
+    World?: ValidationFunction<any>;
+    Space?: ValidationFunction<any>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type WorldCreateFormOverridesProps = {
-    WorldCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type EventCreateFormOverridesProps = {
+    EventCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
-    Spaces?: PrimitiveOverrideProps<AutocompleteProps>;
-    Creator?: PrimitiveOverrideProps<AutocompleteProps>;
+    type?: PrimitiveOverrideProps<TextFieldProps>;
+    Comments?: PrimitiveOverrideProps<AutocompleteProps>;
+    World?: PrimitiveOverrideProps<AutocompleteProps>;
+    Space?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
-export declare type WorldCreateFormProps = React.PropsWithChildren<{
-    overrides?: WorldCreateFormOverridesProps | undefined | null;
+export declare type EventCreateFormProps = React.PropsWithChildren<{
+    overrides?: EventCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: WorldCreateFormInputValues) => WorldCreateFormInputValues;
-    onSuccess?: (fields: WorldCreateFormInputValues) => void;
-    onError?: (fields: WorldCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: WorldCreateFormInputValues) => WorldCreateFormInputValues;
-    onValidate?: WorldCreateFormValidationValues;
+    onSubmit?: (fields: EventCreateFormInputValues) => EventCreateFormInputValues;
+    onSuccess?: (fields: EventCreateFormInputValues) => void;
+    onError?: (fields: EventCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: EventCreateFormInputValues) => EventCreateFormInputValues;
+    onValidate?: EventCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function WorldCreateForm(props: WorldCreateFormProps): React.ReactElement;
+export default function EventCreateForm(props: EventCreateFormProps): React.ReactElement;

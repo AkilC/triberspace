@@ -21,13 +21,8 @@ import {
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { listStores, listWorlds } from "../graphql/queries";
-import {
-  createCreator,
-  updateCreator,
-  updateStore,
-  updateWorld,
-} from "../graphql/mutations";
+import { getAvatar, listProfiles } from "../graphql/queries";
+import { updateAvatar, updateProfile } from "../graphql/mutations";
 const client = generateClient();
 function ArrayField({
   items = [],
@@ -184,9 +179,10 @@ function ArrayField({
     </React.Fragment>
   );
 }
-export default function CreatorCreateForm(props) {
+export default function AvatarUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    avatar: avatarModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -196,59 +192,62 @@ export default function CreatorCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    World: undefined,
-    Store: undefined,
-    name: "",
+    color: "",
+    Profile: undefined,
   };
-  const [World, setWorld] = React.useState(initialValues.World);
-  const [WorldLoading, setWorldLoading] = React.useState(false);
-  const [worldRecords, setWorldRecords] = React.useState([]);
-  const [Store, setStore] = React.useState(initialValues.Store);
-  const [StoreLoading, setStoreLoading] = React.useState(false);
-  const [storeRecords, setStoreRecords] = React.useState([]);
-  const [name, setName] = React.useState(initialValues.name);
+  const [color, setColor] = React.useState(initialValues.color);
+  const [Profile, setProfile] = React.useState(initialValues.Profile);
+  const [ProfileLoading, setProfileLoading] = React.useState(false);
+  const [profileRecords, setProfileRecords] = React.useState([]);
   const autocompleteLength = 10;
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setWorld(initialValues.World);
-    setCurrentWorldValue(undefined);
-    setCurrentWorldDisplayValue("");
-    setStore(initialValues.Store);
-    setCurrentStoreValue(undefined);
-    setCurrentStoreDisplayValue("");
-    setName(initialValues.name);
+    const cleanValues = avatarRecord
+      ? { ...initialValues, ...avatarRecord, Profile }
+      : initialValues;
+    setColor(cleanValues.color);
+    setProfile(cleanValues.Profile);
+    setCurrentProfileValue(undefined);
+    setCurrentProfileDisplayValue("");
     setErrors({});
   };
-  const [currentWorldDisplayValue, setCurrentWorldDisplayValue] =
+  const [avatarRecord, setAvatarRecord] = React.useState(avatarModelProp);
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? (
+            await client.graphql({
+              query: getAvatar.replaceAll("__typename", ""),
+              variables: { id: idProp },
+            })
+          )?.data?.getAvatar
+        : avatarModelProp;
+      const ProfileRecord = record ? await record.Profile : undefined;
+      setProfile(ProfileRecord);
+      setAvatarRecord(record);
+    };
+    queryData();
+  }, [idProp, avatarModelProp]);
+  React.useEffect(resetStateValues, [avatarRecord, Profile]);
+  const [currentProfileDisplayValue, setCurrentProfileDisplayValue] =
     React.useState("");
-  const [currentWorldValue, setCurrentWorldValue] = React.useState(undefined);
-  const WorldRef = React.createRef();
-  const [currentStoreDisplayValue, setCurrentStoreDisplayValue] =
-    React.useState("");
-  const [currentStoreValue, setCurrentStoreValue] = React.useState(undefined);
-  const StoreRef = React.createRef();
+  const [currentProfileValue, setCurrentProfileValue] =
+    React.useState(undefined);
+  const ProfileRef = React.createRef();
   const getIDValue = {
-    World: (r) => JSON.stringify({ id: r?.id }),
-    Store: (r) => JSON.stringify({ id: r?.id }),
+    Profile: (r) => JSON.stringify({ id: r?.id }),
   };
-  const WorldIdSet = new Set(
-    Array.isArray(World)
-      ? World.map((r) => getIDValue.World?.(r))
-      : getIDValue.World?.(World)
-  );
-  const StoreIdSet = new Set(
-    Array.isArray(Store)
-      ? Store.map((r) => getIDValue.Store?.(r))
-      : getIDValue.Store?.(Store)
+  const ProfileIdSet = new Set(
+    Array.isArray(Profile)
+      ? Profile.map((r) => getIDValue.Profile?.(r))
+      : getIDValue.Profile?.(Profile)
   );
   const getDisplayValue = {
-    World: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
-    Store: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
+    Profile: (r) => `${r?.username ? r?.username + " - " : ""}${r?.id}`,
   };
   const validations = {
-    World: [],
-    Store: [],
-    name: [{ type: "Required" }],
+    color: [],
+    Profile: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -267,15 +266,15 @@ export default function CreatorCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const fetchWorldRecords = async (value) => {
-    setWorldLoading(true);
+  const fetchProfileRecords = async (value) => {
+    setProfileLoading(true);
     const newOptions = [];
     let newNext = "";
     while (newOptions.length < autocompleteLength && newNext != null) {
       const variables = {
         limit: autocompleteLength * 5,
         filter: {
-          or: [{ name: { contains: value } }, { id: { contains: value } }],
+          or: [{ username: { contains: value } }, { id: { contains: value } }],
         },
       };
       if (newNext) {
@@ -283,51 +282,21 @@ export default function CreatorCreateForm(props) {
       }
       const result = (
         await client.graphql({
-          query: listWorlds.replaceAll("__typename", ""),
+          query: listProfiles.replaceAll("__typename", ""),
           variables,
         })
-      )?.data?.listWorlds?.items;
+      )?.data?.listProfiles?.items;
       var loaded = result.filter(
-        (item) => !WorldIdSet.has(getIDValue.World?.(item))
+        (item) => !ProfileIdSet.has(getIDValue.Profile?.(item))
       );
       newOptions.push(...loaded);
       newNext = result.nextToken;
     }
-    setWorldRecords(newOptions.slice(0, autocompleteLength));
-    setWorldLoading(false);
-  };
-  const fetchStoreRecords = async (value) => {
-    setStoreLoading(true);
-    const newOptions = [];
-    let newNext = "";
-    while (newOptions.length < autocompleteLength && newNext != null) {
-      const variables = {
-        limit: autocompleteLength * 5,
-        filter: {
-          or: [{ name: { contains: value } }, { id: { contains: value } }],
-        },
-      };
-      if (newNext) {
-        variables["nextToken"] = newNext;
-      }
-      const result = (
-        await client.graphql({
-          query: listStores.replaceAll("__typename", ""),
-          variables,
-        })
-      )?.data?.listStores?.items;
-      var loaded = result.filter(
-        (item) => !StoreIdSet.has(getIDValue.Store?.(item))
-      );
-      newOptions.push(...loaded);
-      newNext = result.nextToken;
-    }
-    setStoreRecords(newOptions.slice(0, autocompleteLength));
-    setStoreLoading(false);
+    setProfileRecords(newOptions.slice(0, autocompleteLength));
+    setProfileLoading(false);
   };
   React.useEffect(() => {
-    fetchWorldRecords("");
-    fetchStoreRecords("");
+    fetchProfileRecords("");
   }, []);
   return (
     <Grid
@@ -338,9 +307,8 @@ export default function CreatorCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          World,
-          Store,
-          name,
+          color: color ?? null,
+          Profile: Profile ?? null,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -378,84 +346,67 @@ export default function CreatorCreateForm(props) {
               modelFields[key] = null;
             }
           });
+          const promises = [];
+          const profileToUnlink = await avatarRecord.Profile;
+          if (profileToUnlink) {
+            promises.push(
+              client.graphql({
+                query: updateProfile.replaceAll("__typename", ""),
+                variables: {
+                  input: {
+                    id: profileToUnlink.id,
+                    profileAvatarId: null,
+                  },
+                },
+              })
+            );
+          }
+          const profileToLink = modelFields.Profile;
+          if (profileToLink) {
+            promises.push(
+              client.graphql({
+                query: updateProfile.replaceAll("__typename", ""),
+                variables: {
+                  input: {
+                    id: Profile.id,
+                    profileAvatarId: avatarRecord.id,
+                  },
+                },
+              })
+            );
+            const avatarToUnlink = await profileToLink.Avatar;
+            if (avatarToUnlink) {
+              promises.push(
+                client.graphql({
+                  query: updateAvatar.replaceAll("__typename", ""),
+                  variables: {
+                    input: {
+                      id: avatarToUnlink.id,
+                      avatarProfileId: null,
+                    },
+                  },
+                })
+              );
+            }
+          }
           const modelFieldsToSave = {
-            creatorWorldId: modelFields?.World?.id,
-            creatorStoreId: modelFields?.Store?.id,
-            name: modelFields.name,
+            color: modelFields.color ?? null,
+            avatarProfileId: modelFields?.Profile?.id ?? null,
           };
-          const creator = (
-            await client.graphql({
-              query: createCreator.replaceAll("__typename", ""),
+          promises.push(
+            client.graphql({
+              query: updateAvatar.replaceAll("__typename", ""),
               variables: {
                 input: {
+                  id: avatarRecord.id,
                   ...modelFieldsToSave,
                 },
               },
             })
-          )?.data?.createCreator;
-          const promises = [];
-          const worldToLink = modelFields.World;
-          if (worldToLink) {
-            promises.push(
-              client.graphql({
-                query: updateWorld.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: World.id,
-                    worldCreatorId: creator.id,
-                  },
-                },
-              })
-            );
-            const creatorToUnlink = await worldToLink.Creator;
-            if (creatorToUnlink) {
-              promises.push(
-                client.graphql({
-                  query: updateCreator.replaceAll("__typename", ""),
-                  variables: {
-                    input: {
-                      id: creatorToUnlink.id,
-                      creatorWorldId: null,
-                    },
-                  },
-                })
-              );
-            }
-          }
-          const storeToLink = modelFields.Store;
-          if (storeToLink) {
-            promises.push(
-              client.graphql({
-                query: updateStore.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: Store.id,
-                    storeCreatorId: creator.id,
-                  },
-                },
-              })
-            );
-            const creatorToUnlink = await storeToLink.Creator;
-            if (creatorToUnlink) {
-              promises.push(
-                client.graphql({
-                  query: updateCreator.replaceAll("__typename", ""),
-                  variables: {
-                    input: {
-                      id: creatorToUnlink.id,
-                      creatorStoreId: null,
-                    },
-                  },
-                })
-              );
-            }
-          }
+          );
           await Promise.all(promises);
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -464,205 +415,128 @@ export default function CreatorCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "CreatorCreateForm")}
+      {...getOverrideProps(overrides, "AvatarUpdateForm")}
       {...rest}
     >
-      <ArrayField
-        lengthLimit={1}
-        onChange={async (items) => {
-          let value = items[0];
-          if (onChange) {
-            const modelFields = {
-              World: value,
-              Store,
-              name,
-            };
-            const result = onChange(modelFields);
-            value = result?.World ?? value;
-          }
-          setWorld(value);
-          setCurrentWorldValue(undefined);
-          setCurrentWorldDisplayValue("");
-        }}
-        currentFieldValue={currentWorldValue}
-        label={"World"}
-        items={World ? [World] : []}
-        hasError={errors?.World?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("World", currentWorldValue)
-        }
-        errorMessage={errors?.World?.errorMessage}
-        getBadgeText={getDisplayValue.World}
-        setFieldValue={(model) => {
-          setCurrentWorldDisplayValue(
-            model ? getDisplayValue.World(model) : ""
-          );
-          setCurrentWorldValue(model);
-        }}
-        inputFieldRef={WorldRef}
-        defaultFieldValue={""}
-      >
-        <Autocomplete
-          label="World"
-          isRequired={false}
-          isReadOnly={false}
-          placeholder="Search World"
-          value={currentWorldDisplayValue}
-          options={worldRecords
-            .filter((r) => !WorldIdSet.has(getIDValue.World?.(r)))
-            .map((r) => ({
-              id: getIDValue.World?.(r),
-              label: getDisplayValue.World?.(r),
-            }))}
-          isLoading={WorldLoading}
-          onSelect={({ id, label }) => {
-            setCurrentWorldValue(
-              worldRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
-            );
-            setCurrentWorldDisplayValue(label);
-            runValidationTasks("World", label);
-          }}
-          onClear={() => {
-            setCurrentWorldDisplayValue("");
-          }}
-          onChange={(e) => {
-            let { value } = e.target;
-            fetchWorldRecords(value);
-            if (errors.World?.hasError) {
-              runValidationTasks("World", value);
-            }
-            setCurrentWorldDisplayValue(value);
-            setCurrentWorldValue(undefined);
-          }}
-          onBlur={() => runValidationTasks("World", currentWorldDisplayValue)}
-          errorMessage={errors.World?.errorMessage}
-          hasError={errors.World?.hasError}
-          ref={WorldRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "World")}
-        ></Autocomplete>
-      </ArrayField>
-      <ArrayField
-        lengthLimit={1}
-        onChange={async (items) => {
-          let value = items[0];
-          if (onChange) {
-            const modelFields = {
-              World,
-              Store: value,
-              name,
-            };
-            const result = onChange(modelFields);
-            value = result?.Store ?? value;
-          }
-          setStore(value);
-          setCurrentStoreValue(undefined);
-          setCurrentStoreDisplayValue("");
-        }}
-        currentFieldValue={currentStoreValue}
-        label={"Store"}
-        items={Store ? [Store] : []}
-        hasError={errors?.Store?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("Store", currentStoreValue)
-        }
-        errorMessage={errors?.Store?.errorMessage}
-        getBadgeText={getDisplayValue.Store}
-        setFieldValue={(model) => {
-          setCurrentStoreDisplayValue(
-            model ? getDisplayValue.Store(model) : ""
-          );
-          setCurrentStoreValue(model);
-        }}
-        inputFieldRef={StoreRef}
-        defaultFieldValue={""}
-      >
-        <Autocomplete
-          label="Store"
-          isRequired={false}
-          isReadOnly={false}
-          placeholder="Search Store"
-          value={currentStoreDisplayValue}
-          options={storeRecords
-            .filter((r) => !StoreIdSet.has(getIDValue.Store?.(r)))
-            .map((r) => ({
-              id: getIDValue.Store?.(r),
-              label: getDisplayValue.Store?.(r),
-            }))}
-          isLoading={StoreLoading}
-          onSelect={({ id, label }) => {
-            setCurrentStoreValue(
-              storeRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
-            );
-            setCurrentStoreDisplayValue(label);
-            runValidationTasks("Store", label);
-          }}
-          onClear={() => {
-            setCurrentStoreDisplayValue("");
-          }}
-          onChange={(e) => {
-            let { value } = e.target;
-            fetchStoreRecords(value);
-            if (errors.Store?.hasError) {
-              runValidationTasks("Store", value);
-            }
-            setCurrentStoreDisplayValue(value);
-            setCurrentStoreValue(undefined);
-          }}
-          onBlur={() => runValidationTasks("Store", currentStoreDisplayValue)}
-          errorMessage={errors.Store?.errorMessage}
-          hasError={errors.Store?.hasError}
-          ref={StoreRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "Store")}
-        ></Autocomplete>
-      </ArrayField>
       <TextField
-        label="Name"
-        isRequired={true}
+        label="Color"
+        isRequired={false}
         isReadOnly={false}
-        value={name}
+        value={color}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              World,
-              Store,
-              name: value,
+              color: value,
+              Profile,
             };
             const result = onChange(modelFields);
-            value = result?.name ?? value;
+            value = result?.color ?? value;
           }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
+          if (errors.color?.hasError) {
+            runValidationTasks("color", value);
           }
-          setName(value);
+          setColor(value);
         }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
+        onBlur={() => runValidationTasks("color", color)}
+        errorMessage={errors.color?.errorMessage}
+        hasError={errors.color?.hasError}
+        {...getOverrideProps(overrides, "color")}
       ></TextField>
+      <ArrayField
+        lengthLimit={1}
+        onChange={async (items) => {
+          let value = items[0];
+          if (onChange) {
+            const modelFields = {
+              color,
+              Profile: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.Profile ?? value;
+          }
+          setProfile(value);
+          setCurrentProfileValue(undefined);
+          setCurrentProfileDisplayValue("");
+        }}
+        currentFieldValue={currentProfileValue}
+        label={"Profile"}
+        items={Profile ? [Profile] : []}
+        hasError={errors?.Profile?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("Profile", currentProfileValue)
+        }
+        errorMessage={errors?.Profile?.errorMessage}
+        getBadgeText={getDisplayValue.Profile}
+        setFieldValue={(model) => {
+          setCurrentProfileDisplayValue(
+            model ? getDisplayValue.Profile(model) : ""
+          );
+          setCurrentProfileValue(model);
+        }}
+        inputFieldRef={ProfileRef}
+        defaultFieldValue={""}
+      >
+        <Autocomplete
+          label="Profile"
+          isRequired={false}
+          isReadOnly={false}
+          placeholder="Search Profile"
+          value={currentProfileDisplayValue}
+          options={profileRecords
+            .filter((r) => !ProfileIdSet.has(getIDValue.Profile?.(r)))
+            .map((r) => ({
+              id: getIDValue.Profile?.(r),
+              label: getDisplayValue.Profile?.(r),
+            }))}
+          isLoading={ProfileLoading}
+          onSelect={({ id, label }) => {
+            setCurrentProfileValue(
+              profileRecords.find((r) =>
+                Object.entries(JSON.parse(id)).every(
+                  ([key, value]) => r[key] === value
+                )
+              )
+            );
+            setCurrentProfileDisplayValue(label);
+            runValidationTasks("Profile", label);
+          }}
+          onClear={() => {
+            setCurrentProfileDisplayValue("");
+          }}
+          defaultValue={Profile}
+          onChange={(e) => {
+            let { value } = e.target;
+            fetchProfileRecords(value);
+            if (errors.Profile?.hasError) {
+              runValidationTasks("Profile", value);
+            }
+            setCurrentProfileDisplayValue(value);
+            setCurrentProfileValue(undefined);
+          }}
+          onBlur={() =>
+            runValidationTasks("Profile", currentProfileDisplayValue)
+          }
+          errorMessage={errors.Profile?.errorMessage}
+          hasError={errors.Profile?.hasError}
+          ref={ProfileRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "Profile")}
+        ></Autocomplete>
+      </ArrayField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || avatarModelProp)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -672,7 +546,10 @@ export default function CreatorCreateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || avatarModelProp) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>

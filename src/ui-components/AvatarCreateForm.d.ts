@@ -21,29 +21,28 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type CommentUpdateFormInputValues = {
-    content?: string;
-    Event?: any;
+export declare type AvatarCreateFormInputValues = {
+    color?: string;
+    Profile?: any;
 };
-export declare type CommentUpdateFormValidationValues = {
-    content?: ValidationFunction<string>;
-    Event?: ValidationFunction<any>;
+export declare type AvatarCreateFormValidationValues = {
+    color?: ValidationFunction<string>;
+    Profile?: ValidationFunction<any>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type CommentUpdateFormOverridesProps = {
-    CommentUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    content?: PrimitiveOverrideProps<TextFieldProps>;
-    Event?: PrimitiveOverrideProps<AutocompleteProps>;
+export declare type AvatarCreateFormOverridesProps = {
+    AvatarCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    color?: PrimitiveOverrideProps<TextFieldProps>;
+    Profile?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
-export declare type CommentUpdateFormProps = React.PropsWithChildren<{
-    overrides?: CommentUpdateFormOverridesProps | undefined | null;
+export declare type AvatarCreateFormProps = React.PropsWithChildren<{
+    overrides?: AvatarCreateFormOverridesProps | undefined | null;
 } & {
-    id?: string;
-    comment?: any;
-    onSubmit?: (fields: CommentUpdateFormInputValues) => CommentUpdateFormInputValues;
-    onSuccess?: (fields: CommentUpdateFormInputValues) => void;
-    onError?: (fields: CommentUpdateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: CommentUpdateFormInputValues) => CommentUpdateFormInputValues;
-    onValidate?: CommentUpdateFormValidationValues;
+    clearOnSuccess?: boolean;
+    onSubmit?: (fields: AvatarCreateFormInputValues) => AvatarCreateFormInputValues;
+    onSuccess?: (fields: AvatarCreateFormInputValues) => void;
+    onError?: (fields: AvatarCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: AvatarCreateFormInputValues) => AvatarCreateFormInputValues;
+    onValidate?: AvatarCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function CommentUpdateForm(props: CommentUpdateFormProps): React.ReactElement;
+export default function AvatarCreateForm(props: AvatarCreateFormProps): React.ReactElement;

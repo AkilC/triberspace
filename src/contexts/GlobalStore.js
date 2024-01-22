@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { listEvents, getEvent, listWorlds } from '../graphql/queries'; // adjust the import path
+import { listEvents, getEvent, listWorlds, getProfile, listProfiles } from '../graphql/queries'; // adjust the import path
 import { generateClient } from 'aws-amplify/api';
+import { getCurrentUser} from "aws-amplify/auth";
 
 export const GlobalContext = createContext();
 
@@ -19,12 +20,13 @@ export const GlobalProvider = ({ children }) => {
   const [navigationRequest, setNavigationRequest] = useState(null);
 
   const client = generateClient();
+  const publicClient = generateClient({ authMode: 'apiKey' });
 
   useEffect(() => {
     const loadEvents = async () => {
       setLoading(true);
       try {
-        const result = await client.graphql({
+        const result = await publicClient.graphql({
           query: listEvents.replaceAll("__typename", ""),
           variables: { limit: pageSize },
         });
@@ -44,11 +46,37 @@ export const GlobalProvider = ({ children }) => {
     loadEvents();
   }, [pageIndex]);
 
+  async function checkUserProfile() {
+      try {
+          const currentUser = await getCurrentUser();
+          const userId = currentUser.username; // or currentUser.attributes.sub
+          console.log("Current User ID:", userId);
+
+          const response = await client.graphql({
+              query: listProfiles,
+          });
+
+          console.log("List Profiles Response:", response);
+
+          const profiles = response.data.listProfiles.items;
+          const userProfile = profiles.find(profile => profile.owner === userId);
+
+          console.log("Matching User Profile:", userProfile);
+
+          return userProfile ? true : false;
+      } catch (error) {
+          console.error('Error checking user profiles:', error);
+          return false;
+      }
+  }
+
+
+
   useEffect(() => {
     const loadWorlds = async () => {
       setLoading(true);
       try {
-        const result = await client.graphql({
+        const result = await publicClient.graphql({
           query: listWorlds.replaceAll("__typename", ""),
           variables: { limit: pageSize },
         });
@@ -68,31 +96,10 @@ export const GlobalProvider = ({ children }) => {
     loadWorlds();
   }, [pageIndex]);
 
-  /* // Function to load an individual event
-  const loadEventDetails = useCallback(async (eventId) => {
-    setEventLoading(true);
-    try {
-      const result = await client.graphql({
-        query: getEvent,
-        variables: { id: eventId },
-      });
-      console.log(result);
-      if (result.data && result.data.getEvent) {
-        setEventDetails(result.data.getEvent);
-      } else {
-        console.error("No data received for the event");
-      }
-    } catch (error) {
-      console.error("Error fetching event details:", error);
-    }
-    setEventLoading(false);
-  },[]); */
-
   return (
     <GlobalContext.Provider value={{
         eventsData, setEventsData, worldsData, setWorldsData, pageIndex, setPageIndex,
-        hasMorePages, loading, eventDetails, setEventDetails,
-        eventLoading
+        hasMorePages, loading, eventDetails, setEventDetails, eventLoading, checkUserProfile
       }}>
         {children}
     </GlobalContext.Provider>

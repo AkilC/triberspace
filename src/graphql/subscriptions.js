@@ -1,6 +1,300 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateAvatar = /* GraphQL */ `
+  subscription OnCreateAvatar(
+    $filter: ModelSubscriptionAvatarFilterInput
+    $owner: String
+  ) {
+    onCreateAvatar(filter: $filter, owner: $owner) {
+      id
+      color
+      Profile {
+        id
+        username
+        name
+        instagram
+        twitter
+        Avatar {
+          id
+          color
+          Profile {
+            id
+            username
+            name
+            instagram
+            twitter
+            createdAt
+            updatedAt
+            profileAvatarId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          avatarProfileId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        profileAvatarId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      avatarProfileId
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateAvatar = /* GraphQL */ `
+  subscription OnUpdateAvatar(
+    $filter: ModelSubscriptionAvatarFilterInput
+    $owner: String
+  ) {
+    onUpdateAvatar(filter: $filter, owner: $owner) {
+      id
+      color
+      Profile {
+        id
+        username
+        name
+        instagram
+        twitter
+        Avatar {
+          id
+          color
+          Profile {
+            id
+            username
+            name
+            instagram
+            twitter
+            createdAt
+            updatedAt
+            profileAvatarId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          avatarProfileId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        profileAvatarId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      avatarProfileId
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteAvatar = /* GraphQL */ `
+  subscription OnDeleteAvatar(
+    $filter: ModelSubscriptionAvatarFilterInput
+    $owner: String
+  ) {
+    onDeleteAvatar(filter: $filter, owner: $owner) {
+      id
+      color
+      Profile {
+        id
+        username
+        name
+        instagram
+        twitter
+        Avatar {
+          id
+          color
+          Profile {
+            id
+            username
+            name
+            instagram
+            twitter
+            createdAt
+            updatedAt
+            profileAvatarId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          avatarProfileId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        profileAvatarId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      avatarProfileId
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreateProfile = /* GraphQL */ `
+  subscription OnCreateProfile(
+    $filter: ModelSubscriptionProfileFilterInput
+    $owner: String
+  ) {
+    onCreateProfile(filter: $filter, owner: $owner) {
+      id
+      username
+      name
+      instagram
+      twitter
+      Avatar {
+        id
+        color
+        Profile {
+          id
+          username
+          name
+          instagram
+          twitter
+          Avatar {
+            id
+            color
+            createdAt
+            updatedAt
+            avatarProfileId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          profileAvatarId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        avatarProfileId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      profileAvatarId
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateProfile = /* GraphQL */ `
+  subscription OnUpdateProfile(
+    $filter: ModelSubscriptionProfileFilterInput
+    $owner: String
+  ) {
+    onUpdateProfile(filter: $filter, owner: $owner) {
+      id
+      username
+      name
+      instagram
+      twitter
+      Avatar {
+        id
+        color
+        Profile {
+          id
+          username
+          name
+          instagram
+          twitter
+          Avatar {
+            id
+            color
+            createdAt
+            updatedAt
+            avatarProfileId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          profileAvatarId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        avatarProfileId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      profileAvatarId
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteProfile = /* GraphQL */ `
+  subscription OnDeleteProfile(
+    $filter: ModelSubscriptionProfileFilterInput
+    $owner: String
+  ) {
+    onDeleteProfile(filter: $filter, owner: $owner) {
+      id
+      username
+      name
+      instagram
+      twitter
+      Avatar {
+        id
+        color
+        Profile {
+          id
+          username
+          name
+          instagram
+          twitter
+          Avatar {
+            id
+            color
+            createdAt
+            updatedAt
+            avatarProfileId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          profileAvatarId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        avatarProfileId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      profileAvatarId
+      owner
+      __typename
+    }
+  }
+`;
 export const onCreateCreator = /* GraphQL */ `
   subscription OnCreateCreator($filter: ModelSubscriptionCreatorFilterInput) {
     onCreateCreator(filter: $filter) {

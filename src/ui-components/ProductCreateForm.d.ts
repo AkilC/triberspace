@@ -21,29 +21,28 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type CommentUpdateFormInputValues = {
-    content?: string;
-    Event?: any;
+export declare type ProductCreateFormInputValues = {
+    Store?: any;
+    itemName?: string;
 };
-export declare type CommentUpdateFormValidationValues = {
-    content?: ValidationFunction<string>;
-    Event?: ValidationFunction<any>;
+export declare type ProductCreateFormValidationValues = {
+    Store?: ValidationFunction<any>;
+    itemName?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type CommentUpdateFormOverridesProps = {
-    CommentUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    content?: PrimitiveOverrideProps<TextFieldProps>;
-    Event?: PrimitiveOverrideProps<AutocompleteProps>;
+export declare type ProductCreateFormOverridesProps = {
+    ProductCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    Store?: PrimitiveOverrideProps<AutocompleteProps>;
+    itemName?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type CommentUpdateFormProps = React.PropsWithChildren<{
-    overrides?: CommentUpdateFormOverridesProps | undefined | null;
+export declare type ProductCreateFormProps = React.PropsWithChildren<{
+    overrides?: ProductCreateFormOverridesProps | undefined | null;
 } & {
-    id?: string;
-    comment?: any;
-    onSubmit?: (fields: CommentUpdateFormInputValues) => CommentUpdateFormInputValues;
-    onSuccess?: (fields: CommentUpdateFormInputValues) => void;
-    onError?: (fields: CommentUpdateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: CommentUpdateFormInputValues) => CommentUpdateFormInputValues;
-    onValidate?: CommentUpdateFormValidationValues;
+    clearOnSuccess?: boolean;
+    onSubmit?: (fields: ProductCreateFormInputValues) => ProductCreateFormInputValues;
+    onSuccess?: (fields: ProductCreateFormInputValues) => void;
+    onError?: (fields: ProductCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: ProductCreateFormInputValues) => ProductCreateFormInputValues;
+    onValidate?: ProductCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function CommentUpdateForm(props: CommentUpdateFormProps): React.ReactElement;
+export default function ProductCreateForm(props: ProductCreateFormProps): React.ReactElement;

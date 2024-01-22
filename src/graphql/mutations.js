@@ -1,6 +1,300 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createAvatar = /* GraphQL */ `
+  mutation CreateAvatar(
+    $input: CreateAvatarInput!
+    $condition: ModelAvatarConditionInput
+  ) {
+    createAvatar(input: $input, condition: $condition) {
+      id
+      color
+      Profile {
+        id
+        username
+        name
+        instagram
+        twitter
+        Avatar {
+          id
+          color
+          Profile {
+            id
+            username
+            name
+            instagram
+            twitter
+            createdAt
+            updatedAt
+            profileAvatarId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          avatarProfileId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        profileAvatarId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      avatarProfileId
+      owner
+      __typename
+    }
+  }
+`;
+export const updateAvatar = /* GraphQL */ `
+  mutation UpdateAvatar(
+    $input: UpdateAvatarInput!
+    $condition: ModelAvatarConditionInput
+  ) {
+    updateAvatar(input: $input, condition: $condition) {
+      id
+      color
+      Profile {
+        id
+        username
+        name
+        instagram
+        twitter
+        Avatar {
+          id
+          color
+          Profile {
+            id
+            username
+            name
+            instagram
+            twitter
+            createdAt
+            updatedAt
+            profileAvatarId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          avatarProfileId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        profileAvatarId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      avatarProfileId
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteAvatar = /* GraphQL */ `
+  mutation DeleteAvatar(
+    $input: DeleteAvatarInput!
+    $condition: ModelAvatarConditionInput
+  ) {
+    deleteAvatar(input: $input, condition: $condition) {
+      id
+      color
+      Profile {
+        id
+        username
+        name
+        instagram
+        twitter
+        Avatar {
+          id
+          color
+          Profile {
+            id
+            username
+            name
+            instagram
+            twitter
+            createdAt
+            updatedAt
+            profileAvatarId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          avatarProfileId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        profileAvatarId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      avatarProfileId
+      owner
+      __typename
+    }
+  }
+`;
+export const createProfile = /* GraphQL */ `
+  mutation CreateProfile(
+    $input: CreateProfileInput!
+    $condition: ModelProfileConditionInput
+  ) {
+    createProfile(input: $input, condition: $condition) {
+      id
+      username
+      name
+      instagram
+      twitter
+      Avatar {
+        id
+        color
+        Profile {
+          id
+          username
+          name
+          instagram
+          twitter
+          Avatar {
+            id
+            color
+            createdAt
+            updatedAt
+            avatarProfileId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          profileAvatarId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        avatarProfileId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      profileAvatarId
+      owner
+      __typename
+    }
+  }
+`;
+export const updateProfile = /* GraphQL */ `
+  mutation UpdateProfile(
+    $input: UpdateProfileInput!
+    $condition: ModelProfileConditionInput
+  ) {
+    updateProfile(input: $input, condition: $condition) {
+      id
+      username
+      name
+      instagram
+      twitter
+      Avatar {
+        id
+        color
+        Profile {
+          id
+          username
+          name
+          instagram
+          twitter
+          Avatar {
+            id
+            color
+            createdAt
+            updatedAt
+            avatarProfileId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          profileAvatarId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        avatarProfileId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      profileAvatarId
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteProfile = /* GraphQL */ `
+  mutation DeleteProfile(
+    $input: DeleteProfileInput!
+    $condition: ModelProfileConditionInput
+  ) {
+    deleteProfile(input: $input, condition: $condition) {
+      id
+      username
+      name
+      instagram
+      twitter
+      Avatar {
+        id
+        color
+        Profile {
+          id
+          username
+          name
+          instagram
+          twitter
+          Avatar {
+            id
+            color
+            createdAt
+            updatedAt
+            avatarProfileId
+            owner
+            __typename
+          }
+          createdAt
+          updatedAt
+          profileAvatarId
+          owner
+          __typename
+        }
+        createdAt
+        updatedAt
+        avatarProfileId
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      profileAvatarId
+      owner
+      __typename
+    }
+  }
+`;
 export const createCreator = /* GraphQL */ `
   mutation CreateCreator(
     $input: CreateCreatorInput!

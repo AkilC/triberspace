@@ -21,13 +21,8 @@ import {
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { listStores, listWorlds } from "../graphql/queries";
-import {
-  createCreator,
-  updateCreator,
-  updateStore,
-  updateWorld,
-} from "../graphql/mutations";
+import { listStores } from "../graphql/queries";
+import { createProduct } from "../graphql/mutations";
 const client = generateClient();
 function ArrayField({
   items = [],
@@ -184,7 +179,7 @@ function ArrayField({
     </React.Fragment>
   );
 }
-export default function CreatorCreateForm(props) {
+export default function ProductCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -196,59 +191,40 @@ export default function CreatorCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    World: undefined,
     Store: undefined,
-    name: "",
+    itemName: "",
   };
-  const [World, setWorld] = React.useState(initialValues.World);
-  const [WorldLoading, setWorldLoading] = React.useState(false);
-  const [worldRecords, setWorldRecords] = React.useState([]);
   const [Store, setStore] = React.useState(initialValues.Store);
   const [StoreLoading, setStoreLoading] = React.useState(false);
   const [storeRecords, setStoreRecords] = React.useState([]);
-  const [name, setName] = React.useState(initialValues.name);
+  const [itemName, setItemName] = React.useState(initialValues.itemName);
   const autocompleteLength = 10;
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setWorld(initialValues.World);
-    setCurrentWorldValue(undefined);
-    setCurrentWorldDisplayValue("");
     setStore(initialValues.Store);
     setCurrentStoreValue(undefined);
     setCurrentStoreDisplayValue("");
-    setName(initialValues.name);
+    setItemName(initialValues.itemName);
     setErrors({});
   };
-  const [currentWorldDisplayValue, setCurrentWorldDisplayValue] =
-    React.useState("");
-  const [currentWorldValue, setCurrentWorldValue] = React.useState(undefined);
-  const WorldRef = React.createRef();
   const [currentStoreDisplayValue, setCurrentStoreDisplayValue] =
     React.useState("");
   const [currentStoreValue, setCurrentStoreValue] = React.useState(undefined);
   const StoreRef = React.createRef();
   const getIDValue = {
-    World: (r) => JSON.stringify({ id: r?.id }),
     Store: (r) => JSON.stringify({ id: r?.id }),
   };
-  const WorldIdSet = new Set(
-    Array.isArray(World)
-      ? World.map((r) => getIDValue.World?.(r))
-      : getIDValue.World?.(World)
-  );
   const StoreIdSet = new Set(
     Array.isArray(Store)
       ? Store.map((r) => getIDValue.Store?.(r))
       : getIDValue.Store?.(Store)
   );
   const getDisplayValue = {
-    World: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
     Store: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
   };
   const validations = {
-    World: [],
     Store: [],
-    name: [{ type: "Required" }],
+    itemName: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -266,35 +242,6 @@ export default function CreatorCreateForm(props) {
     }
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
-  };
-  const fetchWorldRecords = async (value) => {
-    setWorldLoading(true);
-    const newOptions = [];
-    let newNext = "";
-    while (newOptions.length < autocompleteLength && newNext != null) {
-      const variables = {
-        limit: autocompleteLength * 5,
-        filter: {
-          or: [{ name: { contains: value } }, { id: { contains: value } }],
-        },
-      };
-      if (newNext) {
-        variables["nextToken"] = newNext;
-      }
-      const result = (
-        await client.graphql({
-          query: listWorlds.replaceAll("__typename", ""),
-          variables,
-        })
-      )?.data?.listWorlds?.items;
-      var loaded = result.filter(
-        (item) => !WorldIdSet.has(getIDValue.World?.(item))
-      );
-      newOptions.push(...loaded);
-      newNext = result.nextToken;
-    }
-    setWorldRecords(newOptions.slice(0, autocompleteLength));
-    setWorldLoading(false);
   };
   const fetchStoreRecords = async (value) => {
     setStoreLoading(true);
@@ -326,7 +273,6 @@ export default function CreatorCreateForm(props) {
     setStoreLoading(false);
   };
   React.useEffect(() => {
-    fetchWorldRecords("");
     fetchStoreRecords("");
   }, []);
   return (
@@ -338,9 +284,8 @@ export default function CreatorCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          World,
           Store,
-          name,
+          itemName,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -379,78 +324,17 @@ export default function CreatorCreateForm(props) {
             }
           });
           const modelFieldsToSave = {
-            creatorWorldId: modelFields?.World?.id,
-            creatorStoreId: modelFields?.Store?.id,
-            name: modelFields.name,
+            storeID: modelFields?.Store?.id,
+            itemName: modelFields.itemName,
           };
-          const creator = (
-            await client.graphql({
-              query: createCreator.replaceAll("__typename", ""),
-              variables: {
-                input: {
-                  ...modelFieldsToSave,
-                },
+          await client.graphql({
+            query: createProduct.replaceAll("__typename", ""),
+            variables: {
+              input: {
+                ...modelFieldsToSave,
               },
-            })
-          )?.data?.createCreator;
-          const promises = [];
-          const worldToLink = modelFields.World;
-          if (worldToLink) {
-            promises.push(
-              client.graphql({
-                query: updateWorld.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: World.id,
-                    worldCreatorId: creator.id,
-                  },
-                },
-              })
-            );
-            const creatorToUnlink = await worldToLink.Creator;
-            if (creatorToUnlink) {
-              promises.push(
-                client.graphql({
-                  query: updateCreator.replaceAll("__typename", ""),
-                  variables: {
-                    input: {
-                      id: creatorToUnlink.id,
-                      creatorWorldId: null,
-                    },
-                  },
-                })
-              );
-            }
-          }
-          const storeToLink = modelFields.Store;
-          if (storeToLink) {
-            promises.push(
-              client.graphql({
-                query: updateStore.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: Store.id,
-                    storeCreatorId: creator.id,
-                  },
-                },
-              })
-            );
-            const creatorToUnlink = await storeToLink.Creator;
-            if (creatorToUnlink) {
-              promises.push(
-                client.graphql({
-                  query: updateCreator.replaceAll("__typename", ""),
-                  variables: {
-                    input: {
-                      id: creatorToUnlink.id,
-                      creatorStoreId: null,
-                    },
-                  },
-                })
-              );
-            }
-          }
-          await Promise.all(promises);
+            },
+          });
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -464,7 +348,7 @@ export default function CreatorCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "CreatorCreateForm")}
+      {...getOverrideProps(overrides, "ProductCreateForm")}
       {...rest}
     >
       <ArrayField
@@ -473,88 +357,8 @@ export default function CreatorCreateForm(props) {
           let value = items[0];
           if (onChange) {
             const modelFields = {
-              World: value,
-              Store,
-              name,
-            };
-            const result = onChange(modelFields);
-            value = result?.World ?? value;
-          }
-          setWorld(value);
-          setCurrentWorldValue(undefined);
-          setCurrentWorldDisplayValue("");
-        }}
-        currentFieldValue={currentWorldValue}
-        label={"World"}
-        items={World ? [World] : []}
-        hasError={errors?.World?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("World", currentWorldValue)
-        }
-        errorMessage={errors?.World?.errorMessage}
-        getBadgeText={getDisplayValue.World}
-        setFieldValue={(model) => {
-          setCurrentWorldDisplayValue(
-            model ? getDisplayValue.World(model) : ""
-          );
-          setCurrentWorldValue(model);
-        }}
-        inputFieldRef={WorldRef}
-        defaultFieldValue={""}
-      >
-        <Autocomplete
-          label="World"
-          isRequired={false}
-          isReadOnly={false}
-          placeholder="Search World"
-          value={currentWorldDisplayValue}
-          options={worldRecords
-            .filter((r) => !WorldIdSet.has(getIDValue.World?.(r)))
-            .map((r) => ({
-              id: getIDValue.World?.(r),
-              label: getDisplayValue.World?.(r),
-            }))}
-          isLoading={WorldLoading}
-          onSelect={({ id, label }) => {
-            setCurrentWorldValue(
-              worldRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
-            );
-            setCurrentWorldDisplayValue(label);
-            runValidationTasks("World", label);
-          }}
-          onClear={() => {
-            setCurrentWorldDisplayValue("");
-          }}
-          onChange={(e) => {
-            let { value } = e.target;
-            fetchWorldRecords(value);
-            if (errors.World?.hasError) {
-              runValidationTasks("World", value);
-            }
-            setCurrentWorldDisplayValue(value);
-            setCurrentWorldValue(undefined);
-          }}
-          onBlur={() => runValidationTasks("World", currentWorldDisplayValue)}
-          errorMessage={errors.World?.errorMessage}
-          hasError={errors.World?.hasError}
-          ref={WorldRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "World")}
-        ></Autocomplete>
-      </ArrayField>
-      <ArrayField
-        lengthLimit={1}
-        onChange={async (items) => {
-          let value = items[0];
-          if (onChange) {
-            const modelFields = {
-              World,
               Store: value,
-              name,
+              itemName,
             };
             const result = onChange(modelFields);
             value = result?.Store ?? value;
@@ -626,30 +430,29 @@ export default function CreatorCreateForm(props) {
         ></Autocomplete>
       </ArrayField>
       <TextField
-        label="Name"
+        label="Item name"
         isRequired={true}
         isReadOnly={false}
-        value={name}
+        value={itemName}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              World,
               Store,
-              name: value,
+              itemName: value,
             };
             const result = onChange(modelFields);
-            value = result?.name ?? value;
+            value = result?.itemName ?? value;
           }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
+          if (errors.itemName?.hasError) {
+            runValidationTasks("itemName", value);
           }
-          setName(value);
+          setItemName(value);
         }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
+        onBlur={() => runValidationTasks("itemName", itemName)}
+        errorMessage={errors.itemName?.errorMessage}
+        hasError={errors.itemName?.hasError}
+        {...getOverrideProps(overrides, "itemName")}
       ></TextField>
       <Flex
         justifyContent="space-between"

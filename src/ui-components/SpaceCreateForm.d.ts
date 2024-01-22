@@ -21,29 +21,31 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type CommentUpdateFormInputValues = {
-    content?: string;
-    Event?: any;
+export declare type SpaceCreateFormInputValues = {
+    title?: string;
+    World?: any;
+    Events?: any[];
 };
-export declare type CommentUpdateFormValidationValues = {
-    content?: ValidationFunction<string>;
-    Event?: ValidationFunction<any>;
+export declare type SpaceCreateFormValidationValues = {
+    title?: ValidationFunction<string>;
+    World?: ValidationFunction<any>;
+    Events?: ValidationFunction<any>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type CommentUpdateFormOverridesProps = {
-    CommentUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    content?: PrimitiveOverrideProps<TextFieldProps>;
-    Event?: PrimitiveOverrideProps<AutocompleteProps>;
+export declare type SpaceCreateFormOverridesProps = {
+    SpaceCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    title?: PrimitiveOverrideProps<TextFieldProps>;
+    World?: PrimitiveOverrideProps<AutocompleteProps>;
+    Events?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
-export declare type CommentUpdateFormProps = React.PropsWithChildren<{
-    overrides?: CommentUpdateFormOverridesProps | undefined | null;
+export declare type SpaceCreateFormProps = React.PropsWithChildren<{
+    overrides?: SpaceCreateFormOverridesProps | undefined | null;
 } & {
-    id?: string;
-    comment?: any;
-    onSubmit?: (fields: CommentUpdateFormInputValues) => CommentUpdateFormInputValues;
-    onSuccess?: (fields: CommentUpdateFormInputValues) => void;
-    onError?: (fields: CommentUpdateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: CommentUpdateFormInputValues) => CommentUpdateFormInputValues;
-    onValidate?: CommentUpdateFormValidationValues;
+    clearOnSuccess?: boolean;
+    onSubmit?: (fields: SpaceCreateFormInputValues) => SpaceCreateFormInputValues;
+    onSuccess?: (fields: SpaceCreateFormInputValues) => void;
+    onError?: (fields: SpaceCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: SpaceCreateFormInputValues) => SpaceCreateFormInputValues;
+    onValidate?: SpaceCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function CommentUpdateForm(props: CommentUpdateFormProps): React.ReactElement;
+export default function SpaceCreateForm(props: SpaceCreateFormProps): React.ReactElement;

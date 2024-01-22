@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #353535;
+  background-color: #FFFFFF;
   height: 100vh; /* Ensure the body takes up full viewport height */
   width: 100vw; /* Ensure the body takes up full viewport width */
   overflow: hidden; /* Hide overflow */

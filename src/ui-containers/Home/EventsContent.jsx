@@ -151,7 +151,7 @@ export default function EventsContent(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Tiles38723193")}
         >
-          <WatchPartyCollection/>
+          <EventsCollection/>
         </Flex>
       </Flex>
       <Flex

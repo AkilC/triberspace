@@ -21,13 +21,8 @@ import {
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { listStores, listWorlds } from "../graphql/queries";
-import {
-  createCreator,
-  updateCreator,
-  updateStore,
-  updateWorld,
-} from "../graphql/mutations";
+import { listComments, listSpaces, listWorlds } from "../graphql/queries";
+import { createEvent, updateComment } from "../graphql/mutations";
 const client = generateClient();
 function ArrayField({
   items = [],
@@ -184,7 +179,7 @@ function ArrayField({
     </React.Fragment>
   );
 }
-export default function CreatorCreateForm(props) {
+export default function EventCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -196,59 +191,83 @@ export default function CreatorCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    World: undefined,
-    Store: undefined,
     name: "",
+    type: "",
+    Comments: [],
+    World: undefined,
+    Space: undefined,
   };
+  const [name, setName] = React.useState(initialValues.name);
+  const [type, setType] = React.useState(initialValues.type);
+  const [Comments, setComments] = React.useState(initialValues.Comments);
+  const [CommentsLoading, setCommentsLoading] = React.useState(false);
+  const [commentsRecords, setCommentsRecords] = React.useState([]);
   const [World, setWorld] = React.useState(initialValues.World);
   const [WorldLoading, setWorldLoading] = React.useState(false);
   const [worldRecords, setWorldRecords] = React.useState([]);
-  const [Store, setStore] = React.useState(initialValues.Store);
-  const [StoreLoading, setStoreLoading] = React.useState(false);
-  const [storeRecords, setStoreRecords] = React.useState([]);
-  const [name, setName] = React.useState(initialValues.name);
+  const [Space, setSpace] = React.useState(initialValues.Space);
+  const [SpaceLoading, setSpaceLoading] = React.useState(false);
+  const [spaceRecords, setSpaceRecords] = React.useState([]);
   const autocompleteLength = 10;
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
+    setName(initialValues.name);
+    setType(initialValues.type);
+    setComments(initialValues.Comments);
+    setCurrentCommentsValue(undefined);
+    setCurrentCommentsDisplayValue("");
     setWorld(initialValues.World);
     setCurrentWorldValue(undefined);
     setCurrentWorldDisplayValue("");
-    setStore(initialValues.Store);
-    setCurrentStoreValue(undefined);
-    setCurrentStoreDisplayValue("");
-    setName(initialValues.name);
+    setSpace(initialValues.Space);
+    setCurrentSpaceValue(undefined);
+    setCurrentSpaceDisplayValue("");
     setErrors({});
   };
+  const [currentCommentsDisplayValue, setCurrentCommentsDisplayValue] =
+    React.useState("");
+  const [currentCommentsValue, setCurrentCommentsValue] =
+    React.useState(undefined);
+  const CommentsRef = React.createRef();
   const [currentWorldDisplayValue, setCurrentWorldDisplayValue] =
     React.useState("");
   const [currentWorldValue, setCurrentWorldValue] = React.useState(undefined);
   const WorldRef = React.createRef();
-  const [currentStoreDisplayValue, setCurrentStoreDisplayValue] =
+  const [currentSpaceDisplayValue, setCurrentSpaceDisplayValue] =
     React.useState("");
-  const [currentStoreValue, setCurrentStoreValue] = React.useState(undefined);
-  const StoreRef = React.createRef();
+  const [currentSpaceValue, setCurrentSpaceValue] = React.useState(undefined);
+  const SpaceRef = React.createRef();
   const getIDValue = {
+    Comments: (r) => JSON.stringify({ id: r?.id }),
     World: (r) => JSON.stringify({ id: r?.id }),
-    Store: (r) => JSON.stringify({ id: r?.id }),
+    Space: (r) => JSON.stringify({ id: r?.id }),
   };
+  const CommentsIdSet = new Set(
+    Array.isArray(Comments)
+      ? Comments.map((r) => getIDValue.Comments?.(r))
+      : getIDValue.Comments?.(Comments)
+  );
   const WorldIdSet = new Set(
     Array.isArray(World)
       ? World.map((r) => getIDValue.World?.(r))
       : getIDValue.World?.(World)
   );
-  const StoreIdSet = new Set(
-    Array.isArray(Store)
-      ? Store.map((r) => getIDValue.Store?.(r))
-      : getIDValue.Store?.(Store)
+  const SpaceIdSet = new Set(
+    Array.isArray(Space)
+      ? Space.map((r) => getIDValue.Space?.(r))
+      : getIDValue.Space?.(Space)
   );
   const getDisplayValue = {
+    Comments: (r) => `${r?.content ? r?.content + " - " : ""}${r?.id}`,
     World: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
-    Store: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
+    Space: (r) => `${r?.title ? r?.title + " - " : ""}${r?.id}`,
   };
   const validations = {
+    name: [],
+    type: [],
+    Comments: [],
     World: [],
-    Store: [],
-    name: [{ type: "Required" }],
+    Space: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -266,6 +285,35 @@ export default function CreatorCreateForm(props) {
     }
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
+  };
+  const fetchCommentsRecords = async (value) => {
+    setCommentsLoading(true);
+    const newOptions = [];
+    let newNext = "";
+    while (newOptions.length < autocompleteLength && newNext != null) {
+      const variables = {
+        limit: autocompleteLength * 5,
+        filter: {
+          or: [{ content: { contains: value } }, { id: { contains: value } }],
+        },
+      };
+      if (newNext) {
+        variables["nextToken"] = newNext;
+      }
+      const result = (
+        await client.graphql({
+          query: listComments.replaceAll("__typename", ""),
+          variables,
+        })
+      )?.data?.listComments?.items;
+      var loaded = result.filter(
+        (item) => !CommentsIdSet.has(getIDValue.Comments?.(item))
+      );
+      newOptions.push(...loaded);
+      newNext = result.nextToken;
+    }
+    setCommentsRecords(newOptions.slice(0, autocompleteLength));
+    setCommentsLoading(false);
   };
   const fetchWorldRecords = async (value) => {
     setWorldLoading(true);
@@ -296,15 +344,15 @@ export default function CreatorCreateForm(props) {
     setWorldRecords(newOptions.slice(0, autocompleteLength));
     setWorldLoading(false);
   };
-  const fetchStoreRecords = async (value) => {
-    setStoreLoading(true);
+  const fetchSpaceRecords = async (value) => {
+    setSpaceLoading(true);
     const newOptions = [];
     let newNext = "";
     while (newOptions.length < autocompleteLength && newNext != null) {
       const variables = {
         limit: autocompleteLength * 5,
         filter: {
-          or: [{ name: { contains: value } }, { id: { contains: value } }],
+          or: [{ title: { contains: value } }, { id: { contains: value } }],
         },
       };
       if (newNext) {
@@ -312,22 +360,23 @@ export default function CreatorCreateForm(props) {
       }
       const result = (
         await client.graphql({
-          query: listStores.replaceAll("__typename", ""),
+          query: listSpaces.replaceAll("__typename", ""),
           variables,
         })
-      )?.data?.listStores?.items;
+      )?.data?.listSpaces?.items;
       var loaded = result.filter(
-        (item) => !StoreIdSet.has(getIDValue.Store?.(item))
+        (item) => !SpaceIdSet.has(getIDValue.Space?.(item))
       );
       newOptions.push(...loaded);
       newNext = result.nextToken;
     }
-    setStoreRecords(newOptions.slice(0, autocompleteLength));
-    setStoreLoading(false);
+    setSpaceRecords(newOptions.slice(0, autocompleteLength));
+    setSpaceLoading(false);
   };
   React.useEffect(() => {
+    fetchCommentsRecords("");
     fetchWorldRecords("");
-    fetchStoreRecords("");
+    fetchSpaceRecords("");
   }, []);
   return (
     <Grid
@@ -338,9 +387,11 @@ export default function CreatorCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          World,
-          Store,
           name,
+          type,
+          Comments,
+          World,
+          Space,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -379,77 +430,37 @@ export default function CreatorCreateForm(props) {
             }
           });
           const modelFieldsToSave = {
-            creatorWorldId: modelFields?.World?.id,
-            creatorStoreId: modelFields?.Store?.id,
             name: modelFields.name,
+            type: modelFields.type,
+            eventWorldId: modelFields?.World?.id,
+            spaceID: modelFields?.Space?.id,
           };
-          const creator = (
+          const event = (
             await client.graphql({
-              query: createCreator.replaceAll("__typename", ""),
+              query: createEvent.replaceAll("__typename", ""),
               variables: {
                 input: {
                   ...modelFieldsToSave,
                 },
               },
             })
-          )?.data?.createCreator;
+          )?.data?.createEvent;
           const promises = [];
-          const worldToLink = modelFields.World;
-          if (worldToLink) {
-            promises.push(
-              client.graphql({
-                query: updateWorld.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: World.id,
-                    worldCreatorId: creator.id,
-                  },
-                },
-              })
-            );
-            const creatorToUnlink = await worldToLink.Creator;
-            if (creatorToUnlink) {
+          promises.push(
+            ...Comments.reduce((promises, original) => {
               promises.push(
                 client.graphql({
-                  query: updateCreator.replaceAll("__typename", ""),
+                  query: updateComment.replaceAll("__typename", ""),
                   variables: {
                     input: {
-                      id: creatorToUnlink.id,
-                      creatorWorldId: null,
+                      id: original.id,
                     },
                   },
                 })
               );
-            }
-          }
-          const storeToLink = modelFields.Store;
-          if (storeToLink) {
-            promises.push(
-              client.graphql({
-                query: updateStore.replaceAll("__typename", ""),
-                variables: {
-                  input: {
-                    id: Store.id,
-                    storeCreatorId: creator.id,
-                  },
-                },
-              })
-            );
-            const creatorToUnlink = await storeToLink.Creator;
-            if (creatorToUnlink) {
-              promises.push(
-                client.graphql({
-                  query: updateCreator.replaceAll("__typename", ""),
-                  variables: {
-                    input: {
-                      id: creatorToUnlink.id,
-                      creatorStoreId: null,
-                    },
-                  },
-                })
-              );
-            }
-          }
+              return promises;
+            }, [])
+          );
           await Promise.all(promises);
           if (onSuccess) {
             onSuccess(modelFields);
@@ -464,18 +475,156 @@ export default function CreatorCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "CreatorCreateForm")}
+      {...getOverrideProps(overrides, "EventCreateForm")}
       {...rest}
     >
+      <TextField
+        label="Name"
+        isRequired={false}
+        isReadOnly={false}
+        value={name}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name: value,
+              type,
+              Comments,
+              World,
+              Space,
+            };
+            const result = onChange(modelFields);
+            value = result?.name ?? value;
+          }
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
+          }
+          setName(value);
+        }}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
+      ></TextField>
+      <TextField
+        label="Type"
+        isRequired={false}
+        isReadOnly={false}
+        value={type}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              type: value,
+              Comments,
+              World,
+              Space,
+            };
+            const result = onChange(modelFields);
+            value = result?.type ?? value;
+          }
+          if (errors.type?.hasError) {
+            runValidationTasks("type", value);
+          }
+          setType(value);
+        }}
+        onBlur={() => runValidationTasks("type", type)}
+        errorMessage={errors.type?.errorMessage}
+        hasError={errors.type?.hasError}
+        {...getOverrideProps(overrides, "type")}
+      ></TextField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              name,
+              type,
+              Comments: values,
+              World,
+              Space,
+            };
+            const result = onChange(modelFields);
+            values = result?.Comments ?? values;
+          }
+          setComments(values);
+          setCurrentCommentsValue(undefined);
+          setCurrentCommentsDisplayValue("");
+        }}
+        currentFieldValue={currentCommentsValue}
+        label={"Comments"}
+        items={Comments}
+        hasError={errors?.Comments?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("Comments", currentCommentsValue)
+        }
+        errorMessage={errors?.Comments?.errorMessage}
+        getBadgeText={getDisplayValue.Comments}
+        setFieldValue={(model) => {
+          setCurrentCommentsDisplayValue(
+            model ? getDisplayValue.Comments(model) : ""
+          );
+          setCurrentCommentsValue(model);
+        }}
+        inputFieldRef={CommentsRef}
+        defaultFieldValue={""}
+      >
+        <Autocomplete
+          label="Comments"
+          isRequired={false}
+          isReadOnly={false}
+          placeholder="Search Comment"
+          value={currentCommentsDisplayValue}
+          options={commentsRecords.map((r) => ({
+            id: getIDValue.Comments?.(r),
+            label: getDisplayValue.Comments?.(r),
+          }))}
+          isLoading={CommentsLoading}
+          onSelect={({ id, label }) => {
+            setCurrentCommentsValue(
+              commentsRecords.find((r) =>
+                Object.entries(JSON.parse(id)).every(
+                  ([key, value]) => r[key] === value
+                )
+              )
+            );
+            setCurrentCommentsDisplayValue(label);
+            runValidationTasks("Comments", label);
+          }}
+          onClear={() => {
+            setCurrentCommentsDisplayValue("");
+          }}
+          onChange={(e) => {
+            let { value } = e.target;
+            fetchCommentsRecords(value);
+            if (errors.Comments?.hasError) {
+              runValidationTasks("Comments", value);
+            }
+            setCurrentCommentsDisplayValue(value);
+            setCurrentCommentsValue(undefined);
+          }}
+          onBlur={() =>
+            runValidationTasks("Comments", currentCommentsDisplayValue)
+          }
+          errorMessage={errors.Comments?.errorMessage}
+          hasError={errors.Comments?.hasError}
+          ref={CommentsRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "Comments")}
+        ></Autocomplete>
+      </ArrayField>
       <ArrayField
         lengthLimit={1}
         onChange={async (items) => {
           let value = items[0];
           if (onChange) {
             const modelFields = {
-              World: value,
-              Store,
               name,
+              type,
+              Comments,
+              World: value,
+              Space,
             };
             const result = onChange(modelFields);
             value = result?.World ?? value;
@@ -552,105 +701,81 @@ export default function CreatorCreateForm(props) {
           let value = items[0];
           if (onChange) {
             const modelFields = {
-              World,
-              Store: value,
               name,
+              type,
+              Comments,
+              World,
+              Space: value,
             };
             const result = onChange(modelFields);
-            value = result?.Store ?? value;
+            value = result?.Space ?? value;
           }
-          setStore(value);
-          setCurrentStoreValue(undefined);
-          setCurrentStoreDisplayValue("");
+          setSpace(value);
+          setCurrentSpaceValue(undefined);
+          setCurrentSpaceDisplayValue("");
         }}
-        currentFieldValue={currentStoreValue}
-        label={"Store"}
-        items={Store ? [Store] : []}
-        hasError={errors?.Store?.hasError}
+        currentFieldValue={currentSpaceValue}
+        label={"Space"}
+        items={Space ? [Space] : []}
+        hasError={errors?.Space?.hasError}
         runValidationTasks={async () =>
-          await runValidationTasks("Store", currentStoreValue)
+          await runValidationTasks("Space", currentSpaceValue)
         }
-        errorMessage={errors?.Store?.errorMessage}
-        getBadgeText={getDisplayValue.Store}
+        errorMessage={errors?.Space?.errorMessage}
+        getBadgeText={getDisplayValue.Space}
         setFieldValue={(model) => {
-          setCurrentStoreDisplayValue(
-            model ? getDisplayValue.Store(model) : ""
+          setCurrentSpaceDisplayValue(
+            model ? getDisplayValue.Space(model) : ""
           );
-          setCurrentStoreValue(model);
+          setCurrentSpaceValue(model);
         }}
-        inputFieldRef={StoreRef}
+        inputFieldRef={SpaceRef}
         defaultFieldValue={""}
       >
         <Autocomplete
-          label="Store"
+          label="Space"
           isRequired={false}
           isReadOnly={false}
-          placeholder="Search Store"
-          value={currentStoreDisplayValue}
-          options={storeRecords
-            .filter((r) => !StoreIdSet.has(getIDValue.Store?.(r)))
+          placeholder="Search Space"
+          value={currentSpaceDisplayValue}
+          options={spaceRecords
+            .filter((r) => !SpaceIdSet.has(getIDValue.Space?.(r)))
             .map((r) => ({
-              id: getIDValue.Store?.(r),
-              label: getDisplayValue.Store?.(r),
+              id: getIDValue.Space?.(r),
+              label: getDisplayValue.Space?.(r),
             }))}
-          isLoading={StoreLoading}
+          isLoading={SpaceLoading}
           onSelect={({ id, label }) => {
-            setCurrentStoreValue(
-              storeRecords.find((r) =>
+            setCurrentSpaceValue(
+              spaceRecords.find((r) =>
                 Object.entries(JSON.parse(id)).every(
                   ([key, value]) => r[key] === value
                 )
               )
             );
-            setCurrentStoreDisplayValue(label);
-            runValidationTasks("Store", label);
+            setCurrentSpaceDisplayValue(label);
+            runValidationTasks("Space", label);
           }}
           onClear={() => {
-            setCurrentStoreDisplayValue("");
+            setCurrentSpaceDisplayValue("");
           }}
           onChange={(e) => {
             let { value } = e.target;
-            fetchStoreRecords(value);
-            if (errors.Store?.hasError) {
-              runValidationTasks("Store", value);
+            fetchSpaceRecords(value);
+            if (errors.Space?.hasError) {
+              runValidationTasks("Space", value);
             }
-            setCurrentStoreDisplayValue(value);
-            setCurrentStoreValue(undefined);
+            setCurrentSpaceDisplayValue(value);
+            setCurrentSpaceValue(undefined);
           }}
-          onBlur={() => runValidationTasks("Store", currentStoreDisplayValue)}
-          errorMessage={errors.Store?.errorMessage}
-          hasError={errors.Store?.hasError}
-          ref={StoreRef}
+          onBlur={() => runValidationTasks("Space", currentSpaceDisplayValue)}
+          errorMessage={errors.Space?.errorMessage}
+          hasError={errors.Space?.hasError}
+          ref={SpaceRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "Store")}
+          {...getOverrideProps(overrides, "Space")}
         ></Autocomplete>
       </ArrayField>
-      <TextField
-        label="Name"
-        isRequired={true}
-        isReadOnly={false}
-        value={name}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              World,
-              Store,
-              name: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.name ?? value;
-          }
-          if (errors.name?.hasError) {
-            runValidationTasks("name", value);
-          }
-          setName(value);
-        }}
-        onBlur={() => runValidationTasks("name", name)}
-        errorMessage={errors.name?.errorMessage}
-        hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
-      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
