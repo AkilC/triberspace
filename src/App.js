@@ -2,8 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "./index.css";
 import Dashboard from "./ui-containers/Dashboard";
 import "@aws-amplify/ui-react/styles.css";
-import { Authenticator } from "@aws-amplify/ui-react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Hub } from "aws-amplify/utils";
 import { getCurrentUser, fetchAuthSession, signOut } from "aws-amplify/auth";
 import ProfileSetup from "./ui-containers/Profile/ProfileSetup";
@@ -11,7 +10,7 @@ import { GlobalContext } from "./contexts/GlobalStore";
 import AuthenticatorWrapper from "./ui-containers/Authenticator/AuthenticatorWrapper";
 
 const App = () => {
-  const { checkUserProfile } = useContext(GlobalContext);
+  const { checkUserProfile, deleteMultipleProfiles } = useContext(GlobalContext);
   const navigate = useNavigate();
   const [isAuth, setAuth] = useState(false);
   const [authLoading, setAuthLoading] = useState(false);
@@ -27,14 +26,10 @@ const App = () => {
   async function currentSession() {
     try {
       const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-      //console.log(`Access Token: ${accessToken}`);
-      //console.log(`idToken: ${idToken}`);
 
-      if (accessToken) {
-        setAuth(true);
-      } else {
-        setAuth(false);
-      }
+      /* if (accessToken) {
+        console.log(accessToken)
+      } */
     } catch (err) {
       console.log("Error" + err);
     }
@@ -51,7 +46,6 @@ const App = () => {
   useEffect(() => {
     currentAuthenticatedUser();
     currentSession();
-    handleSignOut();
   });
 
   useEffect(() => {
@@ -59,6 +53,7 @@ const App = () => {
       const { payload } = data;
       if (payload.event === "signedIn") {
         //set loading to true while we run checkUserProfiles
+        setAuth(true);
         setAuthLoading(true);
         // Call the context function to check if the user has a profile
         const profileExists = await checkUserProfile();
@@ -71,6 +66,7 @@ const App = () => {
       }
       if (payload.event === "signedOut") {
         console.log("user has signed out");
+        setAuth(false);
       }
     };
   
@@ -85,19 +81,11 @@ const App = () => {
 
   return (
     <>
-          {/* <Routes>
-            <Route path="/" element={<Dashboard width="100%"/>} />
-            <Route path="/authenticate" element={<Authenticator />} />
-            <Route path="/profilesetup" element={<ProfileSetup />} />
-          </Routes> */}
           <Routes>
-            {/* Define routes that take over the full page here */}
             <Route path="/authenticate" element={<AuthenticatorWrapper authLoading={authLoading}/>} />
             <Route path="/profilesetup" element={<ProfileSetup />} />
-            {/* Dashboard is the main layout which includes the sidebar and its routes */}
             <Route path="/*" element={<Dashboard isAuth={isAuth} width="100%"/>} />
           </Routes>
-          {/* <Dashboard width="100%"/> */}
     </>
   );
 };

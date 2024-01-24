@@ -1,14 +1,8 @@
-/***************************************************************************
- * The contents of this file were generated with Amplify Studio.           *
- * Please refrain from making any modifications to this file.              *
- * Any changes to this file will be overwritten when running amplify pull. *
- **************************************************************************/
-
-/* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "./utils";
-import MyIcon from "./MyIcon";
+import { getOverrideProps } from "../../ui-components/utils";
+import MyIcon from "../../ui-components/MyIcon";
 import { Flex } from "@aws-amplify/ui-react";
+
 export default function IconSet(props) {
   const { overrides, ...rest } = props;
   return (

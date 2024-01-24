@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { listEvents, getEvent, listWorlds, getProfile, listProfiles } from '../graphql/queries'; // adjust the import path
+import { listEvents, getEvent, listWorlds, getProfile, listProfiles } from '../graphql/queries';
+import { deleteProfile } from '../graphql/mutations';
 import { generateClient } from 'aws-amplify/api';
 import { getCurrentUser} from "aws-amplify/auth";
 
@@ -17,10 +18,35 @@ export const GlobalProvider = ({ children }) => {
   const [eventDetails, setEventDetails] = useState(null);
   const [eventLoading, setEventLoading] = useState(false);
 
-  const [navigationRequest, setNavigationRequest] = useState(null);
-
   const client = generateClient();
   const publicClient = generateClient({ authMode: 'apiKey' });
+
+  /* async function deleteProfileById(profileId) {
+    try {
+      const deleteInput = {
+        input: {
+          id: profileId
+        }
+      };
+      await client.graphql({
+        query: deleteProfile,
+        variables: deleteInput
+      });
+      console.log(`Profile with ID ${profileId} deleted`);
+    } catch (error) {
+      console.error(`Error deleting profile with ID ${profileId}:`, error);
+    }
+  }
+  
+  // Example usage
+  async function deleteMultipleProfiles(profileIds) {
+    for (const id of profileIds) {
+      await deleteProfileById(id);
+    }
+  }
+  
+  // Call this function with an array of profile IDs you want to delete
+  deleteMultipleProfiles(['0d3e556d-0004-4951-abb5-52c95867bd00', '58713e24-bba7-43b9-bfd5-c24c7562b9fa']); */
 
   useEffect(() => {
     const loadEvents = async () => {

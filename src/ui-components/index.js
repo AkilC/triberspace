@@ -71,6 +71,7 @@ export { default as ProductDetail } from "./ProductDetail";
 export { default as ProductUpdateForm } from "./ProductUpdateForm";
 export { default as ProfileCard } from "./ProfileCard";
 export { default as ProfileContent } from "./ProfileContent";
+export { default as ProfileDropDown } from "./ProfileDropDown";
 export { default as ProfileSideButton } from "./ProfileSideButton";
 export { default as ProfileUpdateForm } from "./ProfileUpdateForm";
 export { default as ReviewCard } from "./ReviewCard";
