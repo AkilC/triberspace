@@ -2,9 +2,17 @@ import * as React from "react";
 import { getOverrideProps } from "../../ui-components/utils";
 import MyIcon from "../../ui-components/MyIcon";
 import { Flex } from "@aws-amplify/ui-react";
+import ProfileDropDown from "./ProfileDropDown";
+import { useState } from "react";
+
 
 export default function IconSet(props) {
   const { overrides, ...rest } = props;
+
+  const [showProfileDropDown, setShowProfileDropDown] = useState(false);
+  const toggleProfileDropDown = () => {
+    setShowProfileDropDown(!showProfileDropDown);
+  };
   return (
     <Flex
       gap="8px"
@@ -99,8 +107,12 @@ export default function IconSet(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           type="PersonFill"
+          style={{cursor: "pointer"}}
           {...getOverrideProps(overrides, "MyIcon40073276")}
-        ></MyIcon>
+          onClick={toggleProfileDropDown} // Add click handler
+        >
+        </MyIcon>
+        {showProfileDropDown && <ProfileDropDown />}
       </Flex>
     </Flex>
   );

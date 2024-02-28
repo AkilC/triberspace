@@ -3,7 +3,6 @@ import { getOverrideProps } from "../../ui-components/utils";
 import { Flex, Icon, Text } from "@aws-amplify/ui-react";
 import MenuItems from "./MenuItems";
 import LogIn from "../Login/Login";
-import ProfileDropDown from "./ProfileDropDown";
 
 export default function Navbar(props) {
   const { isAuth, overrides, ...rest } = props;
@@ -273,7 +272,6 @@ export default function Navbar(props) {
         </Flex>
         {isAuth && <MenuItems />}
         {!isAuth && <LogIn />}
-        <ProfileDropDown/>
       </Flex>
     </Flex>
   );

@@ -37,11 +37,11 @@ DataStore.configure({
 });
 console.log(DataStore)
 
-cognitoUserPoolsTokenProvider.setKeyValueStorage(new CookieStorage({
-  domain: '.localtest.me', // Notice the dot at the beginning
-  // This is important for localhost testing; cookies for localhost may not behave as expected
-  secure: process.env.NODE_ENV === "production" // Use secure cookies in production
-}));
+// cognitoUserPoolsTokenProvider.setKeyValueStorage(new CookieStorage({
+//   domain: '.localtest.me', // Notice the dot at the beginning
+//   // This is important for localhost testing; cookies for localhost may not behave as expected
+//   secure: process.env.NODE_ENV === "production" // Use secure cookies in production
+// }));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

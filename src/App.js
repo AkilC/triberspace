@@ -46,6 +46,7 @@ const App = () => {
   useEffect(() => {
     currentAuthenticatedUser();
     currentSession();
+    // handleSignOut();
   });
 
   useEffect(() => {
